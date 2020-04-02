@@ -66,4 +66,16 @@ module.exports = function(app) {
       });
     }
   });
+
+  app.post("/savemovie", function(req, res){
+    console.log("we hit the route", req.body);
+    console.log("This is our user ", req.session.user.id);
+
+    db.Watching.create({title: req.body.title, UserId: req.session.user.id})
+    .then(function(data){
+      console.log(data);
+    })
+
+  })
+
 };
