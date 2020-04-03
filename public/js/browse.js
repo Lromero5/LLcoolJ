@@ -49,3 +49,11 @@ function displayMovieInfo() {
     })
 
   });
+
+  function getWatching() {
+    $.get("/api/watching", function(data) {
+      console.log(data);
+    });
+  };
+
+  getWatching();
