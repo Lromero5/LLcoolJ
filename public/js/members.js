@@ -5,3 +5,13 @@ $(document).ready(function() {
     $(".member-name").text(data.email);
   });
 });
+
+
+//this is getting everything that the user is watching from our db
+function getWatching() {
+  $.get("/api/watching", function(data) {
+    console.log(data);
+  })
+};
+
+getWatching();

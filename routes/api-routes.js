@@ -68,8 +68,8 @@ module.exports = function(app) {
   });
 
   app.post("/savemovie", function(req, res){
-    console.log("we hit the route", req.body);
-    console.log("This is our user ", req.session.user.id);
+    // console.log("we hit the route", req.body);
+    // console.log("This is our user ", req.session.user.id);
 
     db.Watching.create({title: req.body.title, UserId: req.session.user.id})
     .then(function(data){
@@ -78,10 +78,13 @@ module.exports = function(app) {
 
   })
 
+  //this is grabbing everything that the user is watching from our database
   app.get("/api/watching", function(req, res) {
-    // findAll returns all entries for a table when used with no options
-        db.Watching.findAll({}).then(function(dbWatching) {
-    // We have access to the todos as an argument inside of the callback function
+        db.Watching.findAll({
+          where: {
+            UserId: req.session.user.id,
+          }
+        }).then(function(dbWatching) {
           res.json(dbWatching);
   });
   });
