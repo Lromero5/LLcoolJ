@@ -22,6 +22,7 @@ app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true 
 // Requiring our routes
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
+require("./routes/challenge-api-routes.js")(app); ///route for challenge
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(function() {
