@@ -33,4 +33,12 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/members.html"));
   });
 
+  app.get("/challenge-request", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/challenge-request.html"));
+  });
+
+  app.get("/challenge-board", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/challenge-board.html"));
+  });
+
 };
