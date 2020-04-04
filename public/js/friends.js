@@ -28,7 +28,7 @@
       data.forEach(function(element) {
         console.log(element.requester );
         var allFriends = $("<div>");
-        var friendID = element.id;
+        var friendID = element.requester;
         var pOne = $("<p>").text("friendly friend: " + friendID);
         allFriends.append(pOne);
         $("#friends").append(allFriends);
