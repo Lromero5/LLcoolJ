@@ -3,7 +3,7 @@ $(document).ready(function() {
   var bodyInput = $("#body");
   var titleInput = $("#title");
   var cmsForm = $("#cms");
-  var friendSelect = $("#author");
+  var friendSelect = $("#friend");
   // Adding an event listener for when the form is submitted
   $(cmsForm).on("submit", handleFormSubmit);
   // Gets the part of the url that comes after the "?" (which we have if we're updating a challenge)
@@ -58,7 +58,7 @@ $(document).ready(function() {
     }
   }
 
-  // Submits a new challenge and brings user to blog page upon completion
+  // Submits a new challenge and brings user to board page upon completion
   function submitChallenge(challenge) {
     $.challenge("/api/challenge", challenge, function() {
       window.location.href = "/challenge-board";
@@ -73,7 +73,7 @@ $(document).ready(function() {
       queryUrl = "/api/challenge/" + id;
       break;
     case "user":
-      queryUrl = "/api/user/" + id; 
+      queryUrl = "/api/user/" + Userid; // Review
       break;
     default:
       return;

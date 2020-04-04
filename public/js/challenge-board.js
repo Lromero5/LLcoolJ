@@ -1,40 +1,40 @@
 $(document).ready(function() {
   /* global moment */
 
-  // blogContainer holds all of our posts
+  // blogContainer holds all of our challenges
   var blogContainer = $(".blog-container");
   var postCategorySelect = $("#category");
   // Click events for the edit and delete buttons
-  $(document).on("click", "button.delete", handlePostDelete);
-  $(document).on("click", "button.edit", handlePostEdit);
-  // Variable to hold our posts
-  var posts;
+  $(document).on("click", "button.delete", handleChallengeDelete);
+  $(document).on("click", "button.edit", handleChallengeEdit);
+  // Variable to hold our challenges
+  var challenges;
 
-  // The code below handles the case where we want to get blog posts for a specific author
-  // Looks for a query param in the url for author_id
+  // The code below handles the case where we want to get blog challenges for a specific user
+  // Looks for a query param in the url for user_id
   var url = window.location.search;
-  var authorId;
-  if (url.indexOf("?author_id=") !== -1) {
-    authorId = url.split("=")[1];
-    getPosts(authorId);
+  var userId;
+  if (url.indexOf("?user_id=") !== -1) {
+    userId = url.split("=")[1];
+    getChallenges(userId);
   }
-  // If there's no authorId we just get all posts as usual
+  // If there's no userId we just get all challenges as usual
   else {
-    getPosts();
+    getChallenges();
   }
 
 
-  // This function grabs posts from the database and updates the view
-  function getPosts(author) {
-    authorId = author || "";
-    if (authorId) {
-      authorId = "/?author_id=" + authorId;
+  // This function grabs challenges from the database and updates the view
+  function getChallenges(user) {
+    userId = user || "";
+    if (userId) {
+      userId = "/?user_id=" + userId;
     }
-    $.get("/api/posts" + authorId, function(data) {
-      console.log("Posts", data);
-      posts = data;
-      if (!posts || !posts.length) {
-        displayEmpty(author);
+    $.get("/api/challenge" + userId, function(data) {
+      console.log("Challenge", data);
+      challenges = data;
+      if (!challenges|| !chanlleges.length) {
+        displayEmpty(user);
       }
       else {
         initializeRows();
@@ -42,28 +42,28 @@ $(document).ready(function() {
     });
   }
 
-  // This function does an API call to delete posts
+  // This function does an API call to delete challenges
   function deletePost(id) {
     $.ajax({
       method: "DELETE",
-      url: "/api/posts/" + id
+      url: "/api/challenge/" + id
     })
       .then(function() {
-        getPosts(postCategorySelect.val());
+        getChallenges(postCategorySelect.val());
       });
   }
 
-  // InitializeRows handles appending all of our constructed post HTML inside blogContainer
+  // InitializeRows handles appending all of our constructed challenges HTML inside blogContainer
   function initializeRows() {
     blogContainer.empty();
-    var postsToAdd = [];
-    for (var i = 0; i < posts.length; i++) {
-      postsToAdd.push(createNewRow(posts[i]));
+    var challengesToAdd = [];
+    for (var i = 0; i < challenges.length; i++) {
+      challengesToAdd.push(createNewRow(challenges[i]));
     }
-    blogContainer.append(postsToAdd);
+    blogContainer.append(challengesToAdd);
   }
 
-  // This function constructs a post's HTML
+  // This function constructs a challenge's HTML
   function createNewRow(post) {
     var formattedDate = new Date(post.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
@@ -115,15 +115,15 @@ $(document).ready(function() {
   }
 
   // This function figures out which post we want to edit and takes it to the appropriate url
-  function handlePostEdit() {
+  function handleChallengeEdit() {
     var currentPost = $(this)
       .parent()
       .parent()
-      .data("post");
+      .data("challenge");
     window.location.href = "/cms?post_id=" + currentPost.id;
   }
 
-  // This function displays a message when there are no posts
+  // This function displays a message when there are no challenges
   function displayEmpty(id) {
     var query = window.location.search;
     var partial = "";
@@ -133,7 +133,7 @@ $(document).ready(function() {
     blogContainer.empty();
     var messageH2 = $("<h2>");
     messageH2.css({ "text-align": "center", "margin-top": "50px" });
-    messageH2.html("No posts yet" + partial + ", navigate <a href='/cms" + query +
+    messageH2.html("No challenges yet" + partial + ", navigate <a href='/cms" + query +
     "'>here</a> in order to get started.");
     blogContainer.append(messageH2);
   }
