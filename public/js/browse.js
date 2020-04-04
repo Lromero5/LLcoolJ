@@ -34,8 +34,8 @@ function displayMovieInfo() {
   $("#add-movie").on("click", displayMovieInfo);
 
   $(document).on("click", ".savedbtn", function(){
-    console.log("you got clicked!")
-    console.log($(this).attr("name"));
+    // console.log("you got clicked!")
+    // console.log($(this).attr("name"));
     var newmovie = {
       title: $(this).attr("name")
     };
