@@ -3,15 +3,17 @@ $(document).ready(function() {
   var bodyInput = $("#body");
   var titleInput = $("#title");
   var cmsForm = $("#cms");
-  var userSelect = $("#author");
+  var friendSelect = $("#author");
   // Adding an event listener for when the form is submitted
   $(cmsForm).on("submit", handleFormSubmit);
   // Gets the part of the url that comes after the "?" (which we have if we're updating a challenge)
   var url = window.location.search;
   var challengeId;
-  var userId;
+  var friendId;
   // Sets a flag for whether or not we're updating a challenge to be false initially
   var updating = false;
+  //Friend Info
+  // var friendID = element.requester;
 
   // If we have this section in our url, we pull out the challenge id from the url
   // In '?challenge_id=1', challengeId is 1
@@ -20,12 +22,12 @@ $(document).ready(function() {
     getChallengeData(challengeId, "challenge");
   }
   // Otherwise if we have an user_id in our url, preset the user select box to be our USER
-  else if (url.indexOf("?user_id=") !== -1) {
+  else if (url.indexOf("?friend_id=") !== -1) {
     userId = url.split("=")[1];
   }
 
-  // Getting the users, and their challenges
-  getUsers();
+  // Getting the Friends, and their challenges
+  getFriends();
 
   // A function for handling what happens when the form to create a new challenge is submitted
   function handleFormSubmit(event) {
@@ -91,32 +93,47 @@ $(document).ready(function() {
   }
 
   // A function to get User and then render our list of User
-  function getUsers() {
-    $.get("/api/user", renderUserList);
+  // function getFriends() {
+  //   $.get("/api/request", renderFriendList);
+  // }
+  function getFriends() {
+    $.get("/api/request", function(data) {
+      console.log(data);
+      data.forEach(function(element) {
+        console.log(element.requester );
+        var friendId = element.requester;
+        console.log(friendId)
+     }, renderFriendList);
+      
+    });
   }
-  // Function to either render a list of authors, or if there are none, direct the user to the page
+
+  getFriends();
+  
+  // Function to either render a list of friends, or if there are none, direct the user to the page
   // to create an author first
-  function renderUserList(data) {
-    if (!data.length) {
-      window.location.href = "/user";
-    }
+  function renderFriendList(data) {
     $(".hidden").removeClass("hidden");
     var rowsToAdd = [];
     for (var i = 0; i < data.length; i++) {
-      rowsToAdd.push(createUserRow(data[i]));
+      rowsToAdd.push(createFriendrRow(data[i]));
     }
-    userSelect.empty();
+    friendSelect.empty();
     console.log(rowsToAdd);
-    console.log(UserSelect);
-    userSelect.append(rowsToAdd);
-    userSelect.val(UserId);
+    console.log(friendSelect);
+    friendSelect.append(rowsToAdd);
+    friendSelect.val(friendId);
   }
 
-  // Creates the user options in the dropdown
-  function createUserRow(user) {
+
+
+  // Creates the friend options in the dropdown
+  function createFriendrRow() {
     var listOption = $("<option>");
-    listOption.attr("value", user.id); //EDIT Made
-    listOption.text(user.name);
+    listOption.attr("value", friendId); //EDIT Made
+    listOption.text(friendId);
+    
+    
     return listOption;
   }
 
