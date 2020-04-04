@@ -34,13 +34,3 @@ function getWatching() {
     
   });
 
-
-//this is getting everything that the user is watching from our db
-function getWatching() {
-  $.get("/api/watching", function(data) {
-    console.log(data);
-  })
-
-};
-
-getWatching();
