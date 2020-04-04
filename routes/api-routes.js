@@ -78,6 +78,15 @@ module.exports = function(app) {
 
   })
 
+  app.post("/friendrequest", function(req, res){
+    // console.log("we hit the route", req.body);
+    // console.log("This is our user ", req.session.user.id);
+    db.Request.create({requester: req.session.user.id, UserId: req.body.id})
+    .then(function(data){
+      console.log(data);
+    })
+  })
+
   //this is grabbing everything that the user is watching from our database
   app.get("/api/watching", function(req, res) {
         db.Watching.findAll({
@@ -86,6 +95,14 @@ module.exports = function(app) {
           }
         }).then(function(dbWatching) {
           res.json(dbWatching);
+  });
+  });
+
+  app.get("/api/user", function(req, res) {
+    db.User.findAll({
+      attributes: ['id']
+    }).then(function(data) {
+      res.json(data);
   });
   });
 };
