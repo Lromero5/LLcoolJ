@@ -29,8 +29,29 @@ function getWatching() {
         var image = $("<img>").attr("src", imgURL);
         movieDiv.append(image);
         $("#library").append(movieDiv);
+
+        var completebtn = $("<button>").text('Complete').addClass("chipcount");
+        completebtn.attr('onclick', "addchips()");
+        movieDiv.append(completebtn);
+
       });
     });
     
   });
+}
+
+let chips = 0;
+
+function addchips() {
+    chips= chips + 1;
+    console.log("this is my chip count " + chips);
+ 
+    let counter=
+       document.getElementById("showCount");
+         counter.innerHTML="Number of shows/movies watched is: " + chips ;
+}
+
+
+
+getWatching();
 
