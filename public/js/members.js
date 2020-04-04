@@ -9,7 +9,6 @@ $(document).ready(function() {
 
 function getWatching() {
   $.get("/api/watching", function(data) {
-    console.log(data);
     data.forEach(function(element) {
       var movie = element.title;
       var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
@@ -17,7 +16,6 @@ function getWatching() {
         url: queryURL,
         method: "GET"
       }).then(function (response) {
-    
         var movieDiv = $("<div class='movie'>");
         var rating = response.Rated;
         var pOne = $("<p>").text("Rating: " + rating);
@@ -30,7 +28,7 @@ function getWatching() {
         movieDiv.append(image);
         $("#library").append(movieDiv);
 
-        var completebtn = $("<button>").text('Complete').addClass("chipcount");
+        var completebtn = $("<button id='banana'>").text('Complete').addClass("chipcount");
         completebtn.attr('onclick', "addchips()");
         movieDiv.append(completebtn);
 
@@ -49,6 +47,7 @@ function addchips() {
     let counter=
        document.getElementById("showCount");
          counter.innerHTML="Number of shows/movies watched is: " + chips ;
+  $("#banana").remove();
 }
 
 

@@ -12,6 +12,7 @@
           data: element
         }).then(function(data){
           console.log(data);
+          getFriends;
         })
       }
       else {
@@ -20,6 +21,23 @@
       });
     });
   };
+
+  function getFriends() {
+    $.get("/api/request", function(data) {
+      console.log(data);
+      data.forEach(function(element) {
+        console.log(element.requester );
+        var allFriends = $("<div>");
+        var friendID = element.id;
+        var pOne = $("<p>").text("friendly friend: " + friendID);
+        allFriends.append(pOne);
+        $("#friends").append(allFriends);
+      });
+      
+    });
+  }
+
+  getFriends();
   
   $("#friend-finder").on("click", sendRequest);
   

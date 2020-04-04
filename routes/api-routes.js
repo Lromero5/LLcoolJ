@@ -105,4 +105,15 @@ module.exports = function(app) {
       res.json(data);
   });
   });
+
+  app.get("/api/request", function(req, res) {
+    db.Request.findAll({
+      where: {
+        UserId: req.session.user.id,
+      }
+    }).then(function(dbRequest) {
+      res.json(dbRequest);
+    });
+  });
 };
+
