@@ -128,7 +128,7 @@ $(document).ready(function() {
     var query = window.location.search;
     var partial = "";
     if (id) {
-      partial = " for Author #" + id;
+      partial = " for Author #" + id;///pushing
     }
     blogContainer.empty();
     var messageH2 = $("<h2>");
