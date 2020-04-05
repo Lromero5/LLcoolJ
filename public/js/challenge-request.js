@@ -33,9 +33,9 @@ $(document).ready(function() {
   function handleFormSubmit(event) {
     event.preventDefault();
     // Wont submit the challenge if we are missing a body, title, or user
-    if (!titleInput.val().trim() || !bodyInput.val().trim() || !userSelect.val()) {
-      return;
-    }
+    // if (!titleInput.val().trim() || !bodyInput.val().trim() || !userSelect.val()) {
+    //   return;
+    // }
     // Constructing a newChallenge object to hand to the database
     var newChallenge = {
       title: titleInput
@@ -44,7 +44,7 @@ $(document).ready(function() {
       body: bodyInput
         .val()
         .trim(),
-      UserId: userSelect.val()
+      friendId: friendSelect.val()
     };
 
     // If we're updating a challenge run updateChallenge to update a challenge
@@ -103,8 +103,8 @@ $(document).ready(function() {
         console.log(element.requester );
         var friendId = element.requester;
         console.log(friendId)
-     }, renderFriendList);
-      
+     }, );
+     renderFriendList(data);
     });
   }
 
@@ -116,22 +116,26 @@ $(document).ready(function() {
     $(".hidden").removeClass("hidden");
     var rowsToAdd = [];
     for (var i = 0; i < data.length; i++) {
-      rowsToAdd.push(createFriendrRow(data[i]));
+      // rowsToAdd.push(createFriendrRow(data[i]));
+   
+      friendSelect.append(createFriendrRow(data[i])[0]);
+      console.log(createFriendrRow(data[i])[0]);
     }
-    friendSelect.empty();
+    // friendSelect.empty();
     console.log(rowsToAdd);
     console.log(friendSelect);
-    friendSelect.append(rowsToAdd);
-    friendSelect.val(friendId);
+    // friendSelect.append(rowsToAdd);
+    // friendSelect.val(friendId);
   }
 
 
 
   // Creates the friend options in the dropdown
-  function createFriendrRow() {
+  function createFriendrRow(friendId) {
     var listOption = $("<option>");
-    listOption.attr("value", friendId); //EDIT Made
-    listOption.text(friendId);
+    console.log(friendId);
+    listOption.attr("value", friendId.requester); //EDIT Made
+    listOption.text(friendId.requester);
     
     
     return listOption;
