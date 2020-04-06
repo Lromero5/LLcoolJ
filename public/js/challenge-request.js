@@ -55,11 +55,13 @@ $(document).ready(function() {
     }
     else {
       submitChallenge(newChallenge);
+      console.log(newChallenge);
     }
   }
 
   // Submits a new challenge and brings user to board page upon completion
   function submitChallenge(newChallenge) {
+    console.log(newChallenge);
     $.post("/api/challenge", newChallenge, function() {
       window.location.href = "/challenge-board";
       console.log(newChallenge)
