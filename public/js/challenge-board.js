@@ -12,6 +12,7 @@ $(document).ready(function() {
 
   // The code below handles the case where we want to get blog challenges for a specific user
   // Looks for a query param in the url for user_id
+  ////this is where i need help
   var url = window.location.search;
   var userId;
   if (url.indexOf("?user_id=") !== -1) {
@@ -64,8 +65,8 @@ $(document).ready(function() {
   }
 
   // This function constructs a challenge's HTML
-  function createNewRow(post) {
-    var formattedDate = new Date(post.createdAt);
+  function createNewRow(challenge) {
+    var formattedDate = new Date(challenge.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
     var newPostCard = $("<div>");
     newPostCard.addClass("card");
@@ -106,21 +107,21 @@ $(document).ready(function() {
   }
 
   // This function figures out which post we want to delete and then calls deletePost
-  function handlePostDelete() {
-    var currentPost = $(this)
+  function handleChallengeDelete() {
+    var currentChallenge = $(this)
       .parent()
       .parent()
-      .data("post");
-    deletePost(currentPost.id);
+      .data("challenge");
+    deletePost(currentChallenge.id);
   }
 
   // This function figures out which post we want to edit and takes it to the appropriate url
   function handleChallengeEdit() {
-    var currentPost = $(this)
+    var currentChallenge = $(this)
       .parent()
       .parent()
       .data("challenge");
-    window.location.href = "/cms?post_id=" + currentPost.id;
+    window.location.href = "/cms?challenge_id=" + currentChallenge.id;
   }
 
   // This function displays a message when there are no challenges

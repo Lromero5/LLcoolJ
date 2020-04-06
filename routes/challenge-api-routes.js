@@ -31,6 +31,8 @@ module.exports = function(app) {
 
   // Get route for retrieving a single challenge
   app.get("/api/challenge/:id", function(req, res) {
+//not sure about the ID portion above
+    
     // Here we add an "include" property to our options in our findOne query
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.Author
@@ -43,6 +45,8 @@ module.exports = function(app) {
       res.json(dbChallenges);
     });
   });
+
+///this is where the 500 error is coming from
 
   // POST route for saving a new challenge
   app.post("/api/challenge", function(req, res) {

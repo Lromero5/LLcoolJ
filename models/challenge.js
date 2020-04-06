@@ -11,8 +11,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false,
       len: [1]
+    },
+    friendId:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      len:[1]
     }
-  });
+    });
 
   Challenge.associate = function(models) {
     // We're saying that a Challenge should belong to a User
