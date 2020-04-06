@@ -115,5 +115,15 @@ module.exports = function(app) {
       res.json(dbRequest);
     });
   });
+
+  app.delete("/api/request/:id", function(req, res) {
+    db.Request.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbAuthor) {
+      res.json(dbAuthor);
+    });
+  });
 };
 

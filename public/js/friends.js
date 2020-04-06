@@ -22,22 +22,37 @@
     });
   };
 
-  function getFriends() {
+  function getRequest() {
+    $("#pending").empty();
     $.get("/api/request", function(data) {
-      console.log(data);
       data.forEach(function(element) {
-        console.log(element.requester );
         var allFriends = $("<div>");
         var friendID = element.requester;
         var pOne = $("<p>").text("friendly friend: " + friendID);
         allFriends.append(pOne);
-        $("#friends").append(allFriends);
+        var acceptbtn = $("<button class='accept'>").text('Accept').val(element.id);;
+        var declinebtn = $("<button class='decline'>").text('decline').val(element.id);
+        declinebtn.attr('onclick', "accept(" + element.id + ")");
+        declinebtn.attr('onclick', "decline(" + element.id + ")");
+        allFriends.append(acceptbtn);
+        allFriends.append(declinebtn);
+
+        $("#pending").append(allFriends);
       });
       
     });
   }
 
-  getFriends();
+  function decline(id) {
+      $.ajax({
+        method: "DELETE",
+        url: "/api/request/" + id
+      })
+        .then(getRequest);
+  };
+
+  getRequest();
   
   $("#friend-finder").on("click", sendRequest);
+
   
