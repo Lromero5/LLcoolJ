@@ -98,6 +98,16 @@ module.exports = function(app) {
   });
   });
 
+  app.get("/api/challenge", function(req, res) {
+    db.Challenges.findAll({
+      where: {
+        UserId: req.session.user.id,
+      }
+    }).then(function(dbChallenges) {
+      res.json(dbChallenges);
+});
+});
+
   app.get("/api/user", function(req, res) {
     db.User.findAll({
       attributes: ['id']
