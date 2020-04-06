@@ -15,17 +15,17 @@ module.exports = function(app) {
   // GET route for getting all of the challenges
   app.get("/api/challenge", function(req, res) {
     var query = {};
-    if (req.query.author_id) {
-      query.AuthorId = req.query.author_id;
+    if (req.query.friend_id) {
+      query.friendId = req.query.friend_id;
     }
     // Here we add an "include" property to our options in our findAll query
     // We set the value to an array of the models we want to include in a left outer join
-    // In this case, just db.Author
-    db.Challenge.findAll({
+    // In this case, just db.Challenges
+    db.Users.findAll({
       where: query,
-      include: [db.Author]
-    }).then(function(dbPost) {
-      res.json(dbPost);
+      include: [db.Users]
+    }).then(function(dbChallenges) {
+      res.json(dbChallenges);
     });
   });
 
@@ -34,44 +34,44 @@ module.exports = function(app) {
     // Here we add an "include" property to our options in our findOne query
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.Author
-    db.Challenge.findOne({
+    db.Challenges.findOne({
       where: {
         id: req.params.id
       },
-      include: [db.Author]
-    }).then(function(dbPost) {
-      res.json(dbPost);
+      include: [db.Users]
+    }).then(function(dbChallenges) {
+      res.json(dbChallenges);
     });
   });
 
   // POST route for saving a new challenge
   app.post("/api/challenge", function(req, res) {
-    db.Challenge.create(req.body).then(function(dbPost) {
-      res.json(dbPost);
+    db.Challenges.create(req.body).then(function(dbChallenges) {
+      res.json(dbChallenges);
     });
   });
 
   // DELETE route for deleting posts
   app.delete("/api/challenge/:id", function(req, res) {
-    db.Challenge.destroy({
+    db.Challenges.destroy({
       where: {
         id: req.params.id
       }
-    }).then(function(dbPost) {
-      res.json(dbPost);
+    }).then(function(dbChallenges) {
+      res.json(dbChallenges);
     });
   });
 
   // PUT route for updating posts
   app.put("/api/challenge", function(req, res) {
-    db.Challenge.update(
+    db.Challenges.update(
       req.body,
       {
         where: {
           id: req.body.id
         }
-      }).then(function(dbPost) {
-      res.json(dbPost);
+      }).then(function(dbChallenges) {
+      res.json(dbChallenges);
     });
   });
 };

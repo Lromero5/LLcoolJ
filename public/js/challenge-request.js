@@ -48,7 +48,7 @@ $(document).ready(function() {
     };
 
     // If we're updating a challenge run updateChallenge to update a challenge
-    // Otherwise run submitPost to create a whole new post
+    // Otherwise run submitChallenge to create a whole new challenge
     if (updating) {
       newChallenge.id = challengeId;
       updateChallenge(newChallenge);
@@ -59,9 +59,10 @@ $(document).ready(function() {
   }
 
   // Submits a new challenge and brings user to board page upon completion
-  function submitChallenge(challenge) {
-    $.challenge("/api/challenge", challenge, function() {
+  function submitChallenge(newChallenge) {
+    $.post("/api/challenge", newChallenge, function() {
       window.location.href = "/challenge-board";
+      console.log(newChallenge)
     });
   }
 
@@ -81,11 +82,11 @@ $(document).ready(function() {
     $.get(queryUrl, function(data) {
       if (data) {
         console.log(data.UserId || data.id);
-        // If this post exists, prefill our cms forms with its data
+        // If this challenge exists, prefill our cms forms with its data
         titleInput.val(data.title);
         bodyInput.val(data.body);
         UserId = data.UserId || data.id;
-        // If we have a post with this id, set a flag for us to know to update the post
+        // If we have a challenge with this id, set a flag for us to know to update the challenge
         // when we hit submit
         updating = true;
       }
@@ -141,12 +142,12 @@ $(document).ready(function() {
     return listOption;
   }
 
-  // Update a given post, bring user to the blog page when done
-  function updateChallenge(post) {
+  // Update a given challenege, bring user to the blog page when done
+  function updateChallenge(newChallenge) {
     $.ajax({
       method: "PUT",
       url: "/api/challenge",
-      data: post
+      data: newChallenge
     })
       .then(function() {
         window.location.href = "/challenge-board";
