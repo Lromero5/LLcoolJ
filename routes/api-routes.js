@@ -136,43 +136,43 @@ module.exports = function(app) {
     });
   });
 
-
-app.put("/addchip", function(req, res){
-  db.User.findOne({
-    where: {
-      id: req.session.user.id
-    }
-  }).then(function(data){
-    var newtotal= data.dataValues.chips +1 
-    db.User.update(
-      {chips: newtotal}, 
-      {where: {
+  app.put("/addchip", function(req, res){
+    db.User.findOne({
+      where: {
         id: req.session.user.id
-      }}
-    ).then(function(updatedata){
-      console.log(updatedata)
+      }
+    }).then(function(data){
+      var newtotal= data.dataValues.chips +1 
+      db.User.update(
+        {chips: newtotal}, 
+        {where: {
+          id: req.session.user.id
+        }}
+      ).then(function(updatedata){
+        console.log(updatedata)
+      })
+      // console.log("about to update ", data.dataValues)
     })
-    // console.log("about to update ", data.dataValues)
   })
-})
-
-app.get("/ultimatecouchpotato", function(req, res){
-  db.User.findAll({
-    order: [
-      [
-        "chips", "DESC"
+  
+  app.get("/ultimatecouchpotato", function(req, res){
+    db.User.findAll({
+      order: [
+        [
+          "chips", "DESC"
+        ]
       ]
-    ]
-  }).then(function(ultimatedata){
-
-    var top5= []
-    for(i = 0; i < ultimatedata.length && i < 5; i++){
-      top5.push(ultimatedata[i])
-    }
-
-    res.json(top5);
+    }).then(function(ultimatedata){
+  
+      var top5= []
+      for(i = 0; i < ultimatedata.length && i < 5; i++){
+        top5.push(ultimatedata[i])
+      }
+  
+      res.json(top5);
+    })
   })
-})
+  
+  };
 
-};
 
