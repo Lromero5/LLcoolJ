@@ -14,57 +14,37 @@ module.exports = function(app) {
 
   // GET route for getting all of the challenges
   app.get("/api/challenge", function(req, res) {
-        var query = {};
-    if (req.query.friend_id) {
-      query.friendId = req.query.friend_id;
-    }
     // Here we add an "include" property to our options in our findAll query
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.Challenges
     db.Users.findAll({
-      where: query,
-      include: [db.Users]
+
     }).then(function(dbChallenges) {
       res.json(dbChallenges);
+      console.log("fkdslhglsdkhgsdaklghsldkhfkdshf;lsadfhlsdk;fhas")
     });
   });
 
-  // Get route for retrieving a single challenge
-  app.get("/api/challenge/:id", function(req, res) {
-//not sure about the ID portion above
-    
-    // Here we add an "include" property to our options in our findOne query
-    // We set the value to an array of the models we want to include in a left outer join
-    // In this case, just db.Author
-    db.Challenges.findOne({
-      where: {
-        id: req.params.id
-      },
-      include: [db.Users]
-    }).then(function(dbChallenges) {
-      res.json(dbChallenges);
-    });
-  });
 
 ///this is where the 500 error is coming from
 
-  // POST route for saving a new challenge
-  app.post("/api/challenge", function(req, res) {
-    // console.log("%%%%%",req.body);
-    const tings = {
-      ...req.body,
-      UserId: req.session.user.id
-    }
-    db.Challenges.create(tings)
-    .then(function(dbChallenges) {
-      console.log("%%%%%",dbChallenges);
-      res.json(dbChallenges);
-    })
-    .catch((err) => {
-      console.log('?????????????????????????')
-      console.log(err)
-    });
-  });
+  // // POST route for saving a new challenge
+  // app.post("/api/challenge", function(req, res) {
+  //   // console.log("%%%%%",req.body);
+  //   const tings = {
+  //     ...req.body,
+  //     UserId: req.session.user.id
+  //   }
+  //   db.Challenges.create(tings)
+  //   .then(function(dbChallenges) {
+  //     console.log("%%%%%",dbChallenges);
+  //     res.json(dbChallenges);
+  //   })
+  //   .catch((err) => {
+  //     console.log('?????????????????????????')
+  //     console.log(err)
+  //   });
+  // });
 
   // DELETE route for deleting posts
   app.delete("/api/challenge/:id", function(req, res) {
