@@ -81,7 +81,7 @@ module.exports = function(app) {
   app.post("/friendrequest", function(req, res){
     // console.log("we hit the route", req.body);
     // console.log("This is our user ", req.session.user.id);
-    db.Request.create({requester: req.session.user.id, UserId: req.body.id})
+    db.Request.create({requester: req.session.user.id, UserId: req.body.id, accepted:false})
     .then(function(data){
       console.log(data);
     })
@@ -120,6 +120,18 @@ module.exports = function(app) {
     db.Request.findAll({
       where: {
         UserId: req.session.user.id,
+        accepted: false,
+      }
+    }).then(function(dbRequest) {
+      res.json(dbRequest);
+    });
+  });
+
+  app.get("/api/friends", function(req, res) {
+    db.Request.findAll({
+      where: {
+        UserId: req.session.user.id,
+        accepted: true,
       }
     }).then(function(dbRequest) {
       res.json(dbRequest);
@@ -131,8 +143,22 @@ module.exports = function(app) {
       where: {
         id: req.params.id
       }
-    }).then(function(dbAuthor) {
-      res.json(dbAuthor);
+    }).then(function(dbRequest) {
+      res.json(dbRequest);
+    });
+  });
+
+  app.put("/api/friends/:id", function(req, res) {
+    db.Challenges.update(
+      {
+        where: {
+          id: req.params.id
+        },
+        set: {
+          accepted: true
+        }
+      }).then(function(dbRequest) {
+      res.json(dbRequest);
     });
   });
 };
