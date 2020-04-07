@@ -26,9 +26,6 @@ $(document).ready(function() {
     userId = url.split("=")[1];
   }
 
-  // Getting the Friends, and their challenges
-  getFriends();
-
   // A function for handling what happens when the form to create a new challenge is submitted
   function handleFormSubmit(event) {
     event.preventDefault();
@@ -100,13 +97,9 @@ $(document).ready(function() {
   //   $.get("/api/request", renderFriendList);
   // }
   function getFriends() {
-    $.get("/api/request", function(data) {
+    $.get("/api/friends", function(data) {
       console.log("!!!!!!!!!!!!!!!",data); 
-      data.forEach(function(element) {
-        console.log(element.requester );
-        var friendId = element.requester;
-        console.log(friendId)
-     }, );
+
      renderFriendList(data);
     });
   }

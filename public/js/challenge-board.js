@@ -27,11 +27,8 @@ $(document).ready(function() {
 
   // This function grabs challenges from the database and updates the view
   function getChallenges(user) {
-    userId = user || "";
-    if (userId) {
-      userId = "/?user_id=" + userId;
-    }
-    $.get("/api/challenge" + userId, function(data) {
+
+    $.get("/api/challenge", function(data) {
       console.log("Challenge", data);
       Challenge = data;
       if (!Challenge|| !Challenge.length) {

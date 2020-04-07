@@ -79,12 +79,10 @@ module.exports = function(app) {
   })
 
   app.post("/friendrequest", function(req, res){
-    // console.log("we hit the route", req.body);
+    // console.log("we hit the route", req);
     // console.log("This is our user ", req.session.user.id);
     db.Request.create({requester: req.session.user.id, UserId: req.body.id, accepted:false})
-    .then(function(data){
-      console.log(data);
-    })
+    .then(db.Request.create({requester:  req.body.id , UserId: req.session.user.id, accepted:true}))
   })
 
   //this is grabbing everything that the user is watching from our database
@@ -101,10 +99,12 @@ module.exports = function(app) {
   app.get("/api/challenge", function(req, res) {
     db.Challenges.findAll({
       where: {
-        UserId: req.session.user.id,
+        UserId: req.session.user.id
       }
+
     }).then(function(dbChallenges) {
       res.json(dbChallenges);
+      console.log(dbChallenges);
 });
 });
 
@@ -153,11 +153,12 @@ module.exports = function(app) {
       where: {
         id: req.session.user.id
       }
+
     }).then(function(data) {
       db.Request.update(
         {accepted: true},
         {where: {
-          id: req.session.user.id
+          id: req.params.id
         }}
       ).then(function(dbRequest) {
       res.json(dbRequest);
