@@ -48,9 +48,29 @@ function addchips() {
        document.getElementById("showCount");
          counter.innerHTML="Number of shows/movies watched is: " + chips ;
   $("#banana").remove();
+
+  $.ajax({
+    url: "/addchip",
+    type: "Put",
+  }).then(function(data){
+    console.log(data)
+  })
+
+
 }
 
+$.ajax({
+  url: "/ultimatecouchpotato",
+  type: "Get"
+}).then(function(data){
+  console.log(data)
+  data.forEach(function(ultimatecouchdata){
+
+    var item1 = $("<p>").text(ultimatecouchdata.email)
+    $("#ultimatecouchpotatoe").append(item1);
+
+  })
+})
 
 
 getWatching();
-
