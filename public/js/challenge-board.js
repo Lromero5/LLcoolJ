@@ -33,12 +33,12 @@ $(document).ready(function() {
     }
     $.get("/api/challenge" + userId, function(data) {
       console.log("Challenge", data);
-      challenges = data;
-      if (!challenges|| !chanlleges.length) {
+      Challenge = data;
+      if (!Challenge|| !Challenge.length) {
         displayEmpty(user);
       }
       else {
-        initializeRows();
+        initializeRows(Challenge);
       }
     });
   }
@@ -58,8 +58,8 @@ $(document).ready(function() {
   function initializeRows() {
     blogContainer.empty();
     var challengesToAdd = [];
-    for (var i = 0; i < challenges.length; i++) {
-      challengesToAdd.push(createNewRow(challenges[i]));
+    for (var i = 0; i < Challenge.length; i++) {
+      challengesToAdd.push(createNewRow(Challenge[i]));
     }
     blogContainer.append(challengesToAdd);
   }
@@ -81,7 +81,7 @@ $(document).ready(function() {
     var newPostTitle = $("<h2>");
     var newPostDate = $("<small>");
     var newPostAuthor = $("<h5>");
-    newPostAuthor.text("Written by: " + post.Author.name);
+    newPostAuthor.text("Written by: " + Challenge.UserId);
     newPostAuthor.css({
       float: "right",
       color: "blue",
@@ -91,8 +91,8 @@ $(document).ready(function() {
     var newPostCardBody = $("<div>");
     newPostCardBody.addClass("card-body");
     var newPostBody = $("<p>");
-    newPostTitle.text(post.title + " ");
-    newPostBody.text(post.body);
+    newPostTitle.text(Challenge.title + " ");
+    newPostBody.text(Challenge.body);
     newPostDate.text(formattedDate);
     newPostTitle.append(newPostDate);
     newPostCardHeading.append(deleteBtn);
@@ -102,7 +102,7 @@ $(document).ready(function() {
     newPostCardBody.append(newPostBody);
     newPostCard.append(newPostCardHeading);
     newPostCard.append(newPostCardBody);
-    newPostCard.data("post", post);
+    newPostCard.data("challenges", challenges);
     return newPostCard;
   }
 
@@ -129,7 +129,7 @@ $(document).ready(function() {
     var query = window.location.search;
     var partial = "";
     if (id) {
-      partial = " for Author #" + id;///pushing
+      partial = " for User #" + id;///pushing
     }
     blogContainer.empty();
     var messageH2 = $("<h2>");

@@ -61,7 +61,7 @@ $(document).ready(function() {
 
   // Submits a new challenge and brings user to board page upon completion
   function submitChallenge(newChallenge) {
-    console.log(newChallenge);
+    console.log("#################",newChallenge);
     $.post("/api/challenge", newChallenge, function() {
       window.location.href = "/challenge-board";
       console.log(newChallenge)
@@ -101,7 +101,7 @@ $(document).ready(function() {
   // }
   function getFriends() {
     $.get("/api/request", function(data) {
-      console.log(data);
+      console.log("!!!!!!!!!!!!!!!",data); 
       data.forEach(function(element) {
         console.log(element.requester );
         var friendId = element.requester;
