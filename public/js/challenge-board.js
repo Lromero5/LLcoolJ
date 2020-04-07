@@ -65,8 +65,8 @@ $(document).ready(function() {
   }
 
   // This function constructs a challenge's HTML
-  function createNewRow(challenge) {
-    var formattedDate = new Date(challenge.createdAt);
+  function createNewRow(Challenge) {
+    var formattedDate = new Date(Challenge.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
     var newPostCard = $("<div>");
     newPostCard.addClass("card");
@@ -115,7 +115,7 @@ $(document).ready(function() {
     deletePost(currentChallenge.id);
   }
 
-  // This function figures out which post we want to edit and takes it to the appropriate url
+  // This function figures out which challenge we want to edit and takes it to the appropriate url
   function handleChallengeEdit() {
     var currentChallenge = $(this)
       .parent()
