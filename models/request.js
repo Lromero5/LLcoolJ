@@ -7,6 +7,13 @@ module.exports = function(sequelize, DataTypes) {
           len: [1]
         }
       },
+      accepted: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        validate: {
+          len: [1]
+        }
+      },
     });
   
     Request.associate = function(models) {
