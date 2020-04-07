@@ -53,7 +53,7 @@ module.exports = function(app) {
     // console.log("%%%%%",req.body);
     const tings = {
       ...req.body,
-      UserId: 13
+      UserId: req.session.user.id
     }
     db.Challenges.create(tings)
     .then(function(dbChallenges) {
