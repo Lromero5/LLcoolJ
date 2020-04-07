@@ -20,6 +20,7 @@ function getWatching() {
         var rating = response.Rated;
         var pOne = $("<p>").text("Rating: " + rating);
         movieDiv.append(pOne);
+        console.log("what is happening");
         var released = response.Released;
         var pTwo = $("<p>").text("Released: " + released);
         movieDiv.append(pTwo);;

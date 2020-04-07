@@ -149,18 +149,21 @@ module.exports = function(app) {
   });
 
   app.put("/api/friends/:id", function(req, res) {
-    db.Challenges.update(
-      {
-        where: {
-          id: req.params.id
-        },
-        set: {
-          accepted: true
-        }
-      }).then(function(dbRequest) {
+    db.User.findOne({
+      where: {
+        id: req.session.user.id
+      }
+    }).then(function(data) {
+      db.Request.update(
+        {accepted: true},
+        {where: {
+          id: req.session.user.id
+        }}
+      ).then(function(dbRequest) {
       res.json(dbRequest);
-    });
-  });
+    })
+  })
+})
 
   app.put("/addchip", function(req, res){
     db.User.findOne({
