@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "oad381wopdbrbag6",
-    "password": "irvdgu71ztw7s8al",
-    "database": "ob9d1n7x6vbdu6yb",
-    "host": "ko86t9azcob3a2f9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "username": "root",
+    "password": "",
+    "database": "couchpotatodemo",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
