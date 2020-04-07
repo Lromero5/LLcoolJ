@@ -14,7 +14,7 @@ module.exports = function(app) {
 
   // GET route for getting all of the challenges
   app.get("/api/challenge", function(req, res) {
-    var query = {};
+        var query = {};
     if (req.query.friend_id) {
       query.friendId = req.query.friend_id;
     }
@@ -50,8 +50,19 @@ module.exports = function(app) {
 
   // POST route for saving a new challenge
   app.post("/api/challenge", function(req, res) {
-    db.Challenges.create(req.body).then(function(dbChallenges) {
+    // console.log("%%%%%",req.body);
+    const tings = {
+      ...req.body,
+      UserId: 13
+    }
+    db.Challenges.create(tings)
+    .then(function(dbChallenges) {
+      console.log("%%%%%",dbChallenges);
       res.json(dbChallenges);
+    })
+    .catch((err) => {
+      console.log('?????????????????????????')
+      console.log(err)
     });
   });
 

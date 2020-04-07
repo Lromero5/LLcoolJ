@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Challenge = sequelize.define("Challenge", {
+  var Challenges = sequelize.define("Challenges", {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -16,18 +16,23 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       len:[1]
+    },
+    UserId:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      len:[1]
     }
     });
 
-  Challenge.associate = function(models) {
+  Challenges.associate = function(models) {
     // We're saying that a Challenge should belong to a User
     // A Challenge can't be created without a User due to the foreign key constraint
-    Challenge.belongsTo(models.User, {
+    Challenges.belongsTo(models.User, {
       foreignKey: {
         allowNull: false
       }
     });
   };
 
-  return Challenge;
+  return Challenges;
 };
