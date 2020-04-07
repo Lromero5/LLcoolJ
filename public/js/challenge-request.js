@@ -124,7 +124,7 @@ $(document).ready(function() {
       friendSelect.append(createFriendrRow(data[i])[0]);
       console.log(createFriendrRow(data[i])[0]);
     }
-    // friendSelect.empty();
+    // friendSelect.empty();    
     console.log(rowsToAdd);
     console.log(friendSelect);
     // friendSelect.append(rowsToAdd);
