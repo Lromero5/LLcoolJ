@@ -60,7 +60,7 @@ $(document).ready(function() {
     }
     blogContainer.append(challengesToAdd);
   }
-
+  let del = 0;
   // This function constructs a challenge's HTML
   function createNewRow(Challenge) {
     var formattedDate = new Date(Challenge.createdAt);
@@ -69,9 +69,11 @@ $(document).ready(function() {
     newPostCard.addClass("card");
     var newPostCardHeading = $("<div>");
     newPostCardHeading.addClass("card-header");
+    del = del + 1;
     var deleteBtn = $("<button>");
     deleteBtn.text("x");
     deleteBtn.addClass("delete btn btn-danger");
+    deleteBtn.attr("attr tracker" + del);
     var editBtn = $("<button>");
     editBtn.text("EDIT");
     editBtn.addClass("edit btn btn-info");
@@ -108,7 +110,7 @@ $(document).ready(function() {
     var currentChallenge = $(this)
       .parent()
       .parent()
-      .data("challenge");
+      .data("attr tracker");
     deletePost(currentChallenge.id);
   }
 
@@ -117,8 +119,9 @@ $(document).ready(function() {
     var currentChallenge = $(this)
       .parent()
       .parent()
-      .data("challenge");
-    window.location.href = "/cms?challenge_id=" + currentChallenge.id;
+      .data("attr tracker");
+      UserId = req.session.user.id;
+    window.location.href = "/cms?challenge_UserId=" + currentChallenge.UserId;
   }
 
   // This function displays a message when there are no challenges
