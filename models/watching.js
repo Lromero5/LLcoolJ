@@ -7,6 +7,13 @@ module.exports = function(sequelize, DataTypes) {
           len: [1]
         }
       },
+      completed: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        validate: {
+          len: [1]
+        }
+      }
     });
   
     Watching.associate = function(models) {
