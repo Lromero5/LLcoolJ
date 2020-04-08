@@ -28,23 +28,25 @@ module.exports = function(app) {
 
 ///this is where the 500 error is coming from
 
-  // // POST route for saving a new challenge
-  // app.post("/api/challenge", function(req, res) {
-  //   // console.log("%%%%%",req.body);
-  //   const tings = {
-  //     ...req.body,
-  //     UserId: req.session.user.id
-  //   }
-  //   db.Challenges.create(tings)
-  //   .then(function(dbChallenges) {
-  //     console.log("%%%%%",dbChallenges);
-  //     res.json(dbChallenges);
-  //   })
-  //   .catch((err) => {
-  //     console.log('?????????????????????????')
-  //     console.log(err)
-  //   });
-  // });
+  // POST route for saving a new challenge
+  app.post("/api/challenge", function(req, res) {
+    // console.log("%%%%%",req.session.user.id);
+
+    const userData = {
+      ...req.body,
+      UserId: req.session.user.id
+    };
+
+    db.Challenges.create(userData)
+    .then(function(dbChallenges) {
+      // console.log("%%%%%",dbChallenges);
+      res.json(dbChallenges);
+    })
+    .catch((err) => {
+      console.log('?????????????????????????')
+      console.log(err)
+    });
+  });
 
   // DELETE route for deleting posts
   app.delete("/api/challenge/:id", function(req, res) {
