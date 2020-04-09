@@ -9,7 +9,7 @@ $(document).ready(function() {
   $(document).on("click", "button.edit", handleChallengeEdit);
   // Variable to hold our challenges
   var challenges;
-
+  var i = 0;
   // The code below handles the case where we want to get blog challenges for a specific user
   // Looks for a query param in the url for user_id
   ////this is where i need help
@@ -40,6 +40,16 @@ $(document).ready(function() {
     });
   }
 
+  function getIssued(user) {
+
+    $.get("/api/issued", function(data) {
+      Challenge = data;
+        initializeRows(Challenge);
+
+    });
+  }
+
+
   // This function does an API call to delete challenges
   function deletePost(id) {
     $.ajax({
@@ -53,7 +63,6 @@ $(document).ready(function() {
 
   // InitializeRows handles appending all of our constructed challenges HTML inside blogContainer
   function initializeRows() {
-    blogContainer.empty();
     var challengesToAdd = [];
     for (var i = 0; i < Challenge.length; i++) {
       challengesToAdd.push(createNewRow(Challenge[i]));
@@ -100,6 +109,10 @@ $(document).ready(function() {
     newPostCard.append(newPostCardHeading);
     newPostCard.append(newPostCardBody);
     newPostCard.data("challenges", challenges);
+    if(i === 0) {
+      i=i+1
+      getIssued();
+    }
     return newPostCard;
   }
 

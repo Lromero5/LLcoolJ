@@ -96,6 +96,16 @@ module.exports = function(app) {
   });
   });
 
+  app.get("/api/watching/:id", function(req, res) {
+    db.Watching.findAll({
+      where: {
+        UserId: req.params.id,
+      }
+    }).then(function(dbWatching) {
+      res.json(dbWatching);
+});
+});
+
   app.get("/api/challenge", function(req, res) {
     db.Challenges.findAll({
       where: {
@@ -105,8 +115,20 @@ module.exports = function(app) {
     }).then(function(dbChallenges) {
       res.json(dbChallenges);
       console.log(dbChallenges);
-});
-});
+    });
+  });
+
+  app.get("/api/issued", function(req, res) {
+    db.Challenges.findAll({
+      where: {
+        friendId: req.session.user.id
+      }
+
+    }).then(function(dbChallenges) {
+      res.json(dbChallenges);
+      console.log(dbChallenges);
+    });
+  });
 
   app.get("/api/user", function(req, res) {
     db.User.findAll({

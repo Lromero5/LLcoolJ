@@ -47,9 +47,10 @@ function getWatching() {
         }
       });
     });
-    
   });
 }
+
+
 
 $(document).on("click", ".chipcount", function(){
   $.ajax({
