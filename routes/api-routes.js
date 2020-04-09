@@ -64,37 +64,34 @@ module.exports = function(app) {
         email: req.user.email,
         id: req.user.id
       });
-    }
+    };
+  });
+
+  app.get("/api/user", function(req, res) {
+    db.User.findAll({
+      attributes: ['id']
+    }).then(function(data) {
+      res.json(data);
+    });
   });
 
   app.post("/savemovie", function(req, res){
-    // console.log("we hit the route", req.body);
-    // console.log("This is our user ", req.session.user.id);
-
     db.Watching.create({title: req.body.title, UserId: req.session.user.id})
     .then(function(data){
       console.log(data);
-    })
+    });
+  });
 
-  })
-
-  app.post("/friendrequest", function(req, res){
-    // console.log("we hit the route", req);
-    // console.log("This is our user ", req.session.user.id);
-    db.Request.create({requester: req.session.user.id, UserId: req.body.id, accepted:false})
-    .then(db.Request.create({requester:  req.body.id , UserId: req.session.user.id, accepted:true}))
-  })
-
-  //this is grabbing everything that the user is watching from our database
+    //this is grabbing everything that the user is watching from our database
   app.get("/api/watching", function(req, res) {
-        db.Watching.findAll({
-          where: {
-            UserId: req.session.user.id,
-          }
-        }).then(function(dbWatching) {
-          res.json(dbWatching);
-  });
-  });
+    db.Watching.findAll({
+      where: {
+        UserId: req.session.user.id,
+      }
+    }).then(function(dbWatching) {
+      res.json(dbWatching);
+    });
+  })
 
   app.get("/api/watching/:id", function(req, res) {
     db.Watching.findAll({
@@ -103,8 +100,63 @@ module.exports = function(app) {
       }
     }).then(function(dbWatching) {
       res.json(dbWatching);
-});
-});
+    });
+  });
+
+  app.post("/friendrequest", function(req, res){
+    db.Request.create({requester: req.session.user.id, UserId: req.body.id, accepted:false})
+    .then(db.Request.create({requester:  req.body.id , UserId: req.session.user.id, accepted:true}));
+  });
+
+  app.get("/api/friends", function(req, res) {
+    db.Request.findAll({
+      where: {
+        UserId: req.session.user.id,
+        accepted: true,
+      }
+    }).then(function(dbRequest) {
+      res.json(dbRequest);
+    });
+  });
+
+  app.put("/api/friends/:id", function(req, res) {
+    db.User.findOne({
+      where: {
+        id: req.session.user.id
+      }
+
+    }).then(function(data) {
+      db.Request.update(
+        {accepted: true},
+        {where: {
+          id: req.params.id
+        }}
+      ).then(function(dbRequest) {
+      res.json(dbRequest);
+      });
+    });
+  });
+
+  app.get("/api/request", function(req, res) {
+    db.Request.findAll({
+      where: {
+        UserId: req.session.user.id,
+        accepted: false,
+      }
+    }).then(function(dbRequest) {
+      res.json(dbRequest);
+    });
+  });
+
+  app.delete("/api/request/:id", function(req, res) {
+    db.Request.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbRequest) {
+      res.json(dbRequest);
+    });
+  });
 
   app.get("/api/challenge", function(req, res) {
     db.Challenges.findAll({
@@ -130,64 +182,6 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/user", function(req, res) {
-    db.User.findAll({
-      attributes: ['id']
-    }).then(function(data) {
-      res.json(data);
-  });
-  });
-
-  app.get("/api/request", function(req, res) {
-    db.Request.findAll({
-      where: {
-        UserId: req.session.user.id,
-        accepted: false,
-      }
-    }).then(function(dbRequest) {
-      res.json(dbRequest);
-    });
-  });
-
-  app.get("/api/friends", function(req, res) {
-    db.Request.findAll({
-      where: {
-        UserId: req.session.user.id,
-        accepted: true,
-      }
-    }).then(function(dbRequest) {
-      res.json(dbRequest);
-    });
-  });
-
-  app.delete("/api/request/:id", function(req, res) {
-    db.Request.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then(function(dbRequest) {
-      res.json(dbRequest);
-    });
-  });
-
-  app.put("/api/friends/:id", function(req, res) {
-    db.User.findOne({
-      where: {
-        id: req.session.user.id
-      }
-
-    }).then(function(data) {
-      db.Request.update(
-        {accepted: true},
-        {where: {
-          id: req.params.id
-        }}
-      ).then(function(dbRequest) {
-      res.json(dbRequest);
-    })
-  })
-})
-
   app.put("/changestatus/:title", function(req, res){
     db.Watching.findOne({
       where: {
@@ -204,9 +198,9 @@ module.exports = function(app) {
         }}
       ).then(function(updatedata, err){
         console.log("coming from the backend ", updatedata, err)
-      })
-    })
-  })
+      });
+    });
+  });
   
   app.put("/addchip", function(req, res){
     db.User.findOne({
@@ -222,9 +216,9 @@ module.exports = function(app) {
         }}
       ).then(function(updatedata){
         // console.log(updatedata)
-      })
-    })
-  })
+      });
+    });
+  });
 
   app.get("/ultimatecouchpotato", function(req, res){
     db.User.findAll({
@@ -241,12 +235,9 @@ module.exports = function(app) {
       }
       res.json(top5);
       // console.log(top5)
-    })
-  })
+    });
+  });
 
-
-
-
-  };
+};
 
 
