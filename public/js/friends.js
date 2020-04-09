@@ -50,7 +50,8 @@
         var friendID = element.requester;
         var pOne = $("<p>").text("friendly friend: " + friendID);
         allFriends.append(pOne);
-
+        var completebtn = $("<button>").text('view').addClass("friendButton").val(element.requester);
+        allFriends.append(completebtn);
         $("#friends").append(allFriends);
       });
       
@@ -74,9 +75,39 @@
       
   };
 
+  function getFriendWatching(id) {
+    $.get("/api/watching/" + id, function(data) {
+      $("#library").empty();
+      data.forEach(function(element) { 
+        var movie = element.title;
+        var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).then(function (response) {
+          var movieDiv = $("<div class='movie'>");
+          var rating = response.Rated;
+          var pOne = $("<p>").text("Rating: " + rating);
+          movieDiv.append(pOne);
+          // console.log("what is happening");
+          var released = response.Released;
+          var pTwo = $("<p>").text("Released: " + released);
+          movieDiv.append(pTwo);;
+          var imgURL = response.Poster;
+          var image = $("<img>").attr("src", imgURL);
+          movieDiv.append(image);
+          $("#library").append(movieDiv);
+  
+        });
+      });
+    });
+  }
+
   getFriends();
   getRequest();
   
   $("#friend-finder").on("click", sendRequest);
 
-  
+  $(document).on("click", ".friendButton", function() {
+    getFriendWatching(this.value);
+  });
