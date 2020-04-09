@@ -4,12 +4,23 @@ $(document).ready(function() {
   $.get("/api/user_data").then(function(data) {
     $(".member-name").text(data.email);
   });
-});
 
+
+
+function countWatched (array) {
+  var count = 0
+  for(var i =0; i< array.length; i++) {
+    if(array[i].completed) {
+      count ++
+    }
+  }
+  $('#showCount').text( "Look at all the CHIPS you've earned!!  " + count)
+}
 
 function getWatching() {
   $.get("/api/watching", function(data) {
-    data.forEach(function(element) {
+    countWatched(data)
+    data.forEach(function(element) { 
       var movie = element.title;
       var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
       $.ajax({
@@ -20,7 +31,7 @@ function getWatching() {
         var rating = response.Rated;
         var pOne = $("<p>").text("Rating: " + rating);
         movieDiv.append(pOne);
-        console.log("what is happening");
+        // console.log("what is happening");
         var released = response.Released;
         var pTwo = $("<p>").text("Released: " + released);
         movieDiv.append(pTwo);;
@@ -29,49 +40,60 @@ function getWatching() {
         movieDiv.append(image);
         $("#library").append(movieDiv);
 
-        var completebtn = $("<button id='banana'>").text('Complete').addClass("chipcount");
-        completebtn.attr('onclick', "addchips()");
-        movieDiv.append(completebtn);
 
+        if( !element.completed ) {
+          var completebtn = $("<button id='banana'>").text('Complete').addClass("chipcount").attr("name", movie)
+          movieDiv.append(completebtn);
+        }
       });
     });
     
   });
 }
 
+$(document).on("click", ".chipcount", function(){
+  $.ajax({
+    url: "/changestatus/" + $(this).attr("name"),
+    type: "Put",
+  }).then(function(data){
+    console.log(data)
+  })
+  $("#banana").remove();  
+
+addchips();
+})
+
 let chips = 0;
 
 function addchips() {
     chips= chips + 1;
-    console.log("this is my chip count " + chips);
  
-    let counter=
-       document.getElementById("showCount");
-         counter.innerHTML="Number of shows/movies watched is: " + chips ;
-  $("#banana").remove();
-
   $.ajax({
     url: "/addchip",
     type: "Put",
   }).then(function(data){
     console.log(data)
   })
-
-
 }
+
 
 $.ajax({
   url: "/ultimatecouchpotato",
   type: "Get"
 }).then(function(data){
-  console.log(data)
+  var list = $("<ul> Top Users </ul>")
   data.forEach(function(ultimatecouchdata){
-
-    var item1 = $("<p>").text(ultimatecouchdata.email)
-    $("#ultimatecouchpotatoe").append(item1);
+    // console.log("this is the ultimate couch data", ultimatecouchdata)
+    
+    var item1 = $("<li>").text(ultimatecouchdata.email)
+    list.append(item1);
 
   })
+
+  $(".ultimatecouchpotato").append(list); 
 })
 
 
 getWatching();
+
+});

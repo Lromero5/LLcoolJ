@@ -166,6 +166,26 @@ module.exports = function(app) {
   })
 })
 
+  app.put("/changestatus/:title", function(req, res){
+    db.Watching.findOne({
+      where: {
+        UserId: req.session.user.id,
+      }
+    }).then(function(data){
+      console.log("about to do an update", req.params.title)
+      // var newtotal= data.dataValues.chips +1 
+      db.Watching.update(
+        {completed: true}, 
+        {where: {
+          UserId: req.session.user.id,
+          title: req.params.title
+        }}
+      ).then(function(updatedata, err){
+        console.log("coming from the backend ", updatedata, err)
+      })
+    })
+  })
+  
   app.put("/addchip", function(req, res){
     db.User.findOne({
       where: {
@@ -179,12 +199,11 @@ module.exports = function(app) {
           id: req.session.user.id
         }}
       ).then(function(updatedata){
-        console.log(updatedata)
+        // console.log(updatedata)
       })
-      // console.log("about to update ", data.dataValues)
     })
   })
-  
+
   app.get("/ultimatecouchpotato", function(req, res){
     db.User.findAll({
       order: [
@@ -198,11 +217,14 @@ module.exports = function(app) {
       for(i = 0; i < ultimatedata.length && i < 5; i++){
         top5.push(ultimatedata[i])
       }
-  
       res.json(top5);
+      // console.log(top5)
     })
   })
-  
+
+
+
+
   };
 
 
