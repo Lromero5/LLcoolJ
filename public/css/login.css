@@ -1,0 +1,52 @@
+@import url(https://fonts.googleapis.com/css?family=Dawning+of+a+New+Day|Sniglet:800|Monoton|Fredoka+One|Lobster);
+
+body {
+	color: #fff;
+	background: #292322;
+}
+
+.hamburger {
+	font: 800 64px/64px 'Sniglet', sans-serif;
+	color: #e1b38e;
+	text-shadow: -1px 1px 0 #9a653b,
+		-2px 2px 0 #9a653b,
+		-6px 1px 0 #690,
+		2px 4px 0 #a10,
+		-3px 3px 0 #e1b38e,
+		-4px 4px 0 #9a653b,
+		-5px 5px 0 #9a653b;
+}
+
+.navbar-header{
+    color: #fff;
+    background: #292322;
+}
+
+.container-fluid {
+    color: #fff;
+    background: #292322;
+}
+
+/* .showcase__content>span{
+	transition:all 0.5s ease-in-out;
+}
+.showcase__content>span:hover {
+	text-shadow: none;
+} */
+
+
+/* .showcase {
+	position: relative;
+	padding: 25px;
+	text-align: center;
+}
+
+.showcase::before {
+		position: absolute;
+		top: 50px;
+		left: 10%;
+		display: block;
+		width: 80%;
+		border-bottom: 1px solid #fff;
+		content: "";
+	} */
