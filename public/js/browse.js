@@ -1,7 +1,7 @@
 function displayMovieInfo() {
 
-    var movie = $("#movie-input").val();
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
+  let movie = $("#movie-input").val();
+  let queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
   
     $.ajax({
       url: queryURL,
@@ -9,8 +9,6 @@ function displayMovieInfo() {
     }).then(function (response) {
   
       var movieDiv = $("<div class='movie'>");
-      var addBtn = $("<button id ='testing'>");
-      addBtn.append("Add to Library");
       var rating = response.Rated;
       var pOne = $("<p>").text("Rating: " + rating);
       movieDiv.append(pOne);
@@ -22,14 +20,13 @@ function displayMovieInfo() {
       movieDiv.append(image);
       $("#movies-view").empty();
       $("#movies-view").append(movieDiv);
-      $("#movies-view").append(addBtn);
      
-      var savebtn = $("<button>").text('SAVE').addClass("savedbtn");
+      var savebtn = $("<button>").text('Save to Library').addClass("savedbtn");
       savebtn.attr('name', response.Title);
       movieDiv.append(savebtn);
     });
   
-  }
+  };
 
   $("#add-movie").on("click", displayMovieInfo);
 
