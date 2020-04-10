@@ -12,7 +12,7 @@ $(document).ready(function() {
         count ++
       }
     }
-    $('#showCount').text( "Look at all the CHIPS you've earned!!  " + count)
+    $('#showCount').text( "Chip Count:  " + count)
   }
 
   function getWatching() {
@@ -54,7 +54,7 @@ $(document).ready(function() {
       url: "/changestatus/" + $(this).attr("name"),
       type: "Put",
     }).then(function(data){
-      console.log(data)
+      // console.log(data)
     });
     this.remove();  
 
@@ -70,7 +70,7 @@ $(document).ready(function() {
       url: "/addchip",
       type: "Put",
     }).then(function(data){
-      console.log(data)
+      // console.log(data)
     });
   };
 
@@ -79,11 +79,10 @@ $(document).ready(function() {
     url: "/ultimatecouchpotato",
     type: "Get"
   }).then(function(data){
-    let list = $("<ul> </ul>")
+    let list = $("<ul class='ultimatelist'> </ul>")
     data.forEach(function(ultimatecouchdata){
-      // console.log("this is the ultimate couch data", ultimatecouchdata)
       
-      let item1 = $("<li>").text(ultimatecouchdata.username)
+      let item1 = $("<li class='items'>").text(ultimatecouchdata.username)
       list.append(item1);
 
     });
