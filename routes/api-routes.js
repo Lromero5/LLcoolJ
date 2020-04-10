@@ -191,6 +191,16 @@ module.exports = function(app) {
     });
   });
 
+  app.delete("/api/challenge/:id", function(req, res) {
+    db.Challenges.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbChallenges) {
+      res.json(dbChallenges);
+    });
+  });
+
   app.put("/changestatus/:title", function(req, res){
     db.Watching.findOne({
       where: {
