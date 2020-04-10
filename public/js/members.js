@@ -79,7 +79,7 @@ $(document).ready(function() {
     url: "/ultimatecouchpotato",
     type: "Get"
   }).then(function(data){
-    let list = $("<ul> Top Users </ul>")
+    let list = $("<ul> </ul>")
     data.forEach(function(ultimatecouchdata){
       // console.log("this is the ultimate couch data", ultimatecouchdata)
       
