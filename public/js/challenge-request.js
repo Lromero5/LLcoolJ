@@ -1,39 +1,21 @@
 $(document).ready(function() {
-  // Getting jQuery references to the challenge body, title, form, and author select
+    let currentUser ="";
+  $.get("/api/user_data").then(function(data) {
+    currentUser = data.username;
+  });
   var bodyInput = $("#body");
   var titleInput = $("#title");
   var cmsForm = $("#cms");
   var friendSelect = $("#friend");
-  // Adding an event listener for when the form is submitted
+  console.log(friendSelect.val());
   $(cmsForm).on("submit", handleFormSubmit);
-  // Gets the part of the url that comes after the "?" (which we have if we're updating a challenge)
+  
   var url = window.location.search;
   var challengeId;
-  var friendId;
-  // Sets a flag for whether or not we're updating a challenge to be false initially
   var updating = false;
-  //Friend Info
-  // var friendID = element.requester;
 
-  // If we have this section in our url, we pull out the challenge id from the url
-  // In '?challenge_id=1', challengeId is 1
-  if (url.indexOf("challenge_id=") !== -1) {
-    challengeId = url.split("=")[1];
-    getChallengeData(challengeId, "challenge");
-  }
-  // Otherwise if we have an user_id in our url, preset the user select box to be our USER
-  else if (url.indexOf("?friend_id=") !== -1) {
-    userId = url.split("=")[1];
-  }
-
-  // A function for handling what happens when the form to create a new challenge is submitted
   function handleFormSubmit(event) {
     event.preventDefault();
-    // Wont submit the challenge if we are missing a body, title, or user
-    // if (!titleInput.val().trim() || !bodyInput.val().trim() || !userSelect.val()) {
-    //   return;
-    // }
-    // Constructing a newChallenge object to hand to the database
     var newChallenge = {
       title: titleInput
         .val()
@@ -41,31 +23,25 @@ $(document).ready(function() {
       body: bodyInput
         .val()
         .trim(),
+      challenger: currentUser,
       friendId: friendSelect.val()
     };
 
-    // If we're updating a challenge run updateChallenge to update a challenge
-    // Otherwise run submitChallenge to create a whole new challenge
     if (updating) {
       newChallenge.id = challengeId;
       updateChallenge(newChallenge);
     }
     else {
       submitChallenge(newChallenge);
-      console.log(newChallenge);
-    }
-  }
+    };
+  };
 
-  // Submits a new challenge and brings user to board page upon completion
   function submitChallenge(newChallenge) {
-    console.log("#################",newChallenge);
     $.post("/api/challenge", newChallenge, function() {
       window.location.href = "/challenge-board";
-      console.log(newChallenge)
     });
-  }
+  };
 
-  // Gets challenge data for the current challenge if we're editing, or if we're adding to an author's existing challenges
   function getChallengeData(id, type) {
     var queryUrl;
     switch (type) {
@@ -81,21 +57,15 @@ $(document).ready(function() {
     $.get(queryUrl, function(data) {
       if (data) {
         console.log(data.UserId || data.id);
-        // If this challenge exists, prefill our cms forms with its data
         titleInput.val(data.title);
         bodyInput.val(data.body);
         UserId = data.UserId || data.id;
-        // If we have a challenge with this id, set a flag for us to know to update the challenge
-        // when we hit submit
-        updating = true;
-      }
-    });
-  }
 
-  // A function to get User and then render our list of User
-  // function getFriends() {
-  //   $.get("/api/request", renderFriendList);
-  // }
+        updating = true;
+      };
+    });
+  };
+
   function getFriends() {
     $.get("/api/friends", function(data) {
       console.log("!!!!!!!!!!!!!!!",data); 
@@ -106,38 +76,24 @@ $(document).ready(function() {
 
   getFriends();
   
-  // Function to either render a list of friends, or if there are none, direct the user to the page
-  // to create an author first
   function renderFriendList(data) {
     $(".hidden").removeClass("hidden");
-    var rowsToAdd = [];
     for (var i = 0; i < data.length; i++) {
-      // rowsToAdd.push(createFriendrRow(data[i]));
-   
       friendSelect.append(createFriendrRow(data[i])[0]);
-      console.log(createFriendrRow(data[i])[0]);
-    }
-    // friendSelect.empty();    
-    console.log(rowsToAdd);
-    console.log(friendSelect);
-    // friendSelect.append(rowsToAdd);
-    // friendSelect.val(friendId);
-  }
+    };
 
+  };
 
-
-  // Creates the friend options in the dropdown
   function createFriendrRow(friendId) {
     var listOption = $("<option>");
     console.log(friendId);
-    listOption.attr("value", friendId.requester); //EDIT Made
+    listOption.attr("value", friendId.requester);
     listOption.text(friendId.requester);
     
     
     return listOption;
-  }
+  };
 
-  // Update a given challenege, bring user to the blog page when done
   function updateChallenge(newChallenge) {
     $.ajax({
       method: "PUT",
@@ -147,5 +103,5 @@ $(document).ready(function() {
       .then(function() {
         window.location.href = "/challenge-board";
       });
-  }
+  };
 });

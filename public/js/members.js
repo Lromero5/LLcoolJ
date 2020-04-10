@@ -2,10 +2,8 @@ $(document).ready(function() {
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
   $.get("/api/user_data").then(function(data) {
-    $(".member-name").text(data.email);
+    $(".member-name").text(data.username);
   });
-
-
 
   function countWatched (array) {
     let count = 0
@@ -85,7 +83,7 @@ $(document).ready(function() {
     data.forEach(function(ultimatecouchdata){
       // console.log("this is the ultimate couch data", ultimatecouchdata)
       
-      let item1 = $("<li>").text(ultimatecouchdata.email)
+      let item1 = $("<li>").text(ultimatecouchdata.username)
       list.append(item1);
 
     });

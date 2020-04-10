@@ -12,13 +12,14 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       len: [1]
     },
-    friendId:{
-      type: DataTypes.INTEGER,
+    challenger: {
+      type: DataTypes.STRING,
       allowNull: false,
-      len:[1]
+      len: [1]
     },
-    UserId:{
-      type: DataTypes.INTEGER,
+    
+    friendId:{
+      type: DataTypes.STRING,
       allowNull: false,
       len:[1]
     }
