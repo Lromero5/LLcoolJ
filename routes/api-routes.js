@@ -29,9 +29,6 @@ module.exports = function(app) {
     });    
   });
 
-  // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
-  // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
-  // otherwise send back an error
   app.post("/api/signup", function(req, res) {
     db.User.create({
       email: req.body.email,
@@ -46,31 +43,28 @@ module.exports = function(app) {
       });
   });
 
-  // Route for logging user out
   app.get("/logout", function(req, res) {
     req.logout();
     req.session.user = null;
     res.redirect("/");
   });
 
-  // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function(req, res) {
-    if (!req.user) {
-      // The user is not logged in, send back an empty object
+
+    if (!req.session.user) {
       res.json({});
+
     } else {
-      // Otherwise send back the user's email and id
-      // Sending back a password, even a hashed password, isn't a good idea
       res.json({
-        username: req.user.username,
-        id: req.user.id
+        username: req.session.user.username,
+        id: req.session.user.id
       });
     };
   });
 
   app.get("/api/user", function(req, res) {
     db.User.findAll({
-      attributes: ['id']
+      attributes: ['username', "id"]
     }).then(function(data) {
       res.json(data);
     });
@@ -104,8 +98,8 @@ module.exports = function(app) {
   });
 
   app.post("/friendrequest", function(req, res){
-    db.Request.create({requester: req.session.user.id, UserId: req.body.id, accepted:false})
-    .then(db.Request.create({requester:  req.body.id , UserId: req.session.user.id, accepted:true}));
+    db.Request.create({requester: req.session.user.username, UserId: req.body.id, accepted:false})
+    .then(db.Request.create({requester:  req.body.username , UserId: req.session.user.id, accepted:true}));
   });
 
   app.get("/api/friends", function(req, res) {
@@ -158,6 +152,21 @@ module.exports = function(app) {
     });
   });
 
+  app.post("/api/challenge", function(req, res) {
+    const userData = {
+      ...req.body,
+      UserId: req.session.user.id
+    };
+    console.log(userData);
+    db.Challenges.create(userData)
+    .then(function(dbChallenges) {
+      res.json(dbChallenges);
+    })
+    .catch((err) => {
+      console.log(err)
+    });
+  });
+
   app.get("/api/challenge", function(req, res) {
     db.Challenges.findAll({
       where: {
@@ -173,7 +182,7 @@ module.exports = function(app) {
   app.get("/api/issued", function(req, res) {
     db.Challenges.findAll({
       where: {
-        friendId: req.session.user.id
+        friendId: req.session.user.username
       }
 
     }).then(function(dbChallenges) {
@@ -227,7 +236,6 @@ module.exports = function(app) {
         ]
       ]
     }).then(function(ultimatedata){
-  
       var top5= []
       for(i = 0; i < ultimatedata.length && i < 5; i++){
         top5.push(ultimatedata[i])

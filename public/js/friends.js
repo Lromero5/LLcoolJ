@@ -1,11 +1,11 @@
 
   function sendRequest() {
     $.get("/api/user", function(data) {
-      var userSearch = parseInt($("#user-search").val());
+      var userSearch = $("#user-search").val();
       var users = data;
       users.forEach(function(element) {
-
-      if(userSearch === element.id) {
+        console.log(element);
+      if(userSearch === element.username) {
         $.ajax({
           url: "/friendrequest",
           type: "POST",
@@ -75,8 +75,8 @@
       
   };
 
-  function getFriendWatching(id) {
-    $.get("/api/watching/" + id, function(data) {
+  function getFriendWatching(username) {
+    $.get("/api/watching/" + username, function(data) {
       $("#library").empty();
       data.forEach(function(element) { 
         var movie = element.title;
@@ -89,7 +89,6 @@
           var rating = response.Rated;
           var pOne = $("<p>").text("Rating: " + rating);
           movieDiv.append(pOne);
-          // console.log("what is happening");
           var released = response.Released;
           var pTwo = $("<p>").text("Released: " + released);
           movieDiv.append(pTwo);;

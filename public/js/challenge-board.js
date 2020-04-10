@@ -1,38 +1,17 @@
 $(document).ready(function() {
-  /* global moment */
-
-  // blogContainer holds all of our challenges
   var blogContainer = $(".blog-container");
   var postCategorySelect = $("#category");
-  // Click events for the edit and delete buttons
   $(document).on("click", "button.delete", handleChallengeDelete);
   $(document).on("click", "button.edit", handleChallengeEdit);
-  // Variable to hold our challenges
   var challenges;
   var i = 0;
-  // The code below handles the case where we want to get blog challenges for a specific user
-  // Looks for a query param in the url for user_id
-  ////this is where i need help
-  var url = window.location.search;
-  var userId;
-  if (url.indexOf("?user_id=") !== -1) {
-    userId = url.split("=")[1];
-    getChallenges(userId);
-  }
-  // If there's no userId we just get all challenges as usual
-  else {
-    getChallenges();
-  };
-
-
-  // This function grabs challenges from the database and updates the view
-  function getChallenges(user) {
-
+  getChallenges();
+  function getChallenges() {
     $.get("/api/challenge", function(data) {
       console.log("Challenge", data);
       Challenge = data;
       if (!Challenge|| !Challenge.length) {
-        displayEmpty(user);
+        displayEmpty();
       }
       else {
         initializeRows(Challenge);
@@ -40,17 +19,18 @@ $(document).ready(function() {
     });
   };
 
-  function getIssued(user) {
-
+  function getIssued() {
     $.get("/api/issued", function(data) {
       Challenge = data;
+      if (!Challenge|| !Challenge.length) {
+        return;
+      }
+      else {
         initializeRows(Challenge);
-
+      }
     });
   };
 
-
-  // This function does an API call to delete challenges
   function deletePost(id) {
     $.ajax({
       method: "DELETE",
@@ -61,16 +41,14 @@ $(document).ready(function() {
       });
   };
 
-  // InitializeRows handles appending all of our constructed challenges HTML inside blogContainer
   function initializeRows() {
     var challengesToAdd = [];
     for (var i = 0; i < Challenge.length; i++) {
       challengesToAdd.push(createNewRow(Challenge[i]));
-    }
+    };
     blogContainer.append(challengesToAdd);
   };
 
-  // This function constructs a challenge's HTML
   function createNewRow(Challenge) {
     var formattedDate = new Date(Challenge.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
@@ -87,7 +65,7 @@ $(document).ready(function() {
     var newPostTitle = $("<h2>");
     var newPostDate = $("<small>");
     var newPostAuthor = $("<h5>");
-    newPostAuthor.text("Written by: " + Challenge.UserId);
+    newPostAuthor.text("Written by: " + Challenge.challenger);
     newPostAuthor.css({
       float: "right",
       color: "blue",
