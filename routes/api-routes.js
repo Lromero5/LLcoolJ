@@ -70,6 +70,16 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/user/:id" , function(req, res) {
+    db.User.findOne({
+      where: {
+        username: req.params.id
+      }
+    }).then(function(data) {
+      res.json(data);
+    });
+  });
+
   app.post("/savemovie", function(req, res){
     db.Watching.create({title: req.body.title, UserId: req.session.user.id})
     .then(function(data){
@@ -88,6 +98,7 @@ module.exports = function(app) {
   })
 
   app.get("/api/watching/:id", function(req, res) {
+    console.log(req.params);
     db.Watching.findAll({
       where: {
         UserId: req.params.id,
