@@ -13,6 +13,7 @@ $(document).ready(function() {
         getIssued();
       }
       else {
+        console.log(i);
         initializeRows(Challenge);
       }
     });
@@ -22,11 +23,11 @@ $(document).ready(function() {
     $.get("/api/issued", function(data) {
       Challenge = data;
       if (!Challenge|| !Challenge.length) {
-        displayEmpty();
+        return;
       }
       else {
         initializeRows(Challenge);
-      }
+      };
     });
   };
 
@@ -75,7 +76,8 @@ $(document).ready(function() {
     newPostCard.data("challenges", challenges);
     if(i === 0) {
       i=i+1;
-      getIssued;
+      console.log(i);
+      getIssued();
     }
     return newPostCard;
   };

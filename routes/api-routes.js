@@ -175,7 +175,6 @@ module.exports = function(app) {
 
     }).then(function(dbChallenges) {
       res.json(dbChallenges);
-      console.log(dbChallenges);
     });
   });
 
@@ -187,7 +186,6 @@ module.exports = function(app) {
 
     }).then(function(dbChallenges) {
       res.json(dbChallenges);
-      console.log(dbChallenges);
     });
   });
 
