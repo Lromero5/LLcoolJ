@@ -22,7 +22,7 @@ $(document).ready(function() {
   // If there's no userId we just get all challenges as usual
   else {
     getChallenges();
-  }
+  };
 
 
   // This function grabs challenges from the database and updates the view
@@ -38,7 +38,7 @@ $(document).ready(function() {
         initializeRows(Challenge);
       }
     });
-  }
+  };
 
   function getIssued(user) {
 
@@ -47,7 +47,7 @@ $(document).ready(function() {
         initializeRows(Challenge);
 
     });
-  }
+  };
 
 
   // This function does an API call to delete challenges
@@ -59,7 +59,7 @@ $(document).ready(function() {
       .then(function() {
         getChallenges(postCategorySelect.val());
       });
-  }
+  };
 
   // InitializeRows handles appending all of our constructed challenges HTML inside blogContainer
   function initializeRows() {
@@ -68,7 +68,7 @@ $(document).ready(function() {
       challengesToAdd.push(createNewRow(Challenge[i]));
     }
     blogContainer.append(challengesToAdd);
-  }
+  };
 
   // This function constructs a challenge's HTML
   function createNewRow(Challenge) {
@@ -110,7 +110,7 @@ $(document).ready(function() {
     newPostCard.append(newPostCardBody);
     newPostCard.data("challenges", challenges);
     if(i === 0) {
-      i=i+1
+      i=i+1;
       getIssued();
     }
     return newPostCard;
