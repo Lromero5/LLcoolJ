@@ -7,36 +7,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
   <link href="css/style.css" rel="stylesheet">
+  <link href="./css/main.css" rel="stylesheet">
+
 </head>
 
 <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar">
         <div class= "row">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/members">Couch Potato</a>
+                    <a class="navbar-brand showcase__content" href="/members"><span class="hamburger">Couch Potato</span></a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/members">Home</a></li>
-                    <li><a href="/browse">Search</a></li>
-                    <li><a href="/challenge-request">Start a New Challenge</a></li>
+                    <li><a href="/browse">Browse</a></li>
+                    <li><a href="/challenge-request">Challenge Your Friends</a></li>
                     <li><a href="/challenge-board">View Your Challenge Board</a></li>
-                    <li> <a class="navbar-brand" href="/logout">
-                        Logout
-                      </a> </li>
+                    <li> <a class="navbar-brand" href="/logout"> Logout</a> </li>
                 </ul>
             </div>
         </div>
-
     </nav>
     <div class ="container">
 
-  <div class="row">
-    <div class="col-sm-6 ultimatecouchpotato">
-
-        <p id="showCount">
-        </p>    
-    </div>
+  <div class="row dynamicdata">
+    <!-- <div class="col-sm-12"> -->
+        <div class="ultimatecouchpotato col-sm-6"> ULTIMATE COUCH POTATOES</div>
+        <div id="showCount" class="counteronpage col-sm-6"></div>    
+    <!-- </div> -->
   </div>      
 
         <div class ="row">
