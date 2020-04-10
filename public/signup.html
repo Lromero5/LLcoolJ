@@ -6,30 +6,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
-  <link href="stylesheets/style.css" rel="stylesheet">
+  <!-- <link href="stylesheets/style.css" rel="stylesheet"> -->
+  <link href="./css/main.css" rel="stylesheet">
+  <link href="./css/slideshow.css" rel="stylesheet">
+
 </head>
 
 <body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/">Couch Potato</a>
+        <a class="navbar-brand showcase__content" href="/"><span class="hamburger">Couch Potato</span></a>
       </div>
-      <!-- <ul class="nav navbar-nav">
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="/members">Page 1</a></li>
-        <li><a href="/browse">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
-      </ul> -->
     </div>
   </nav>
-<div class = "jumbotron col-sm-12">
-    <h1>Couch Potato</h1>
-</div>
+
   <div class="container">
     <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h2>Sign Up Form</h2>
+
+      <div class="col-md-6">
+        <div class="slideshow-container">
+
+          <div class="mySlides">
+            <h1 class="centertext">Welcome to Couch Potato! </h1>
+            <h3 class="centertext">Connect with friends and share what you're currently watching. </h3>
+          </div>
+          
+          <div class="mySlides">
+            <img class="slideshowimage" src="../images/tvshows.jpeg" style="width:70%">
+          </div>
+          
+          <div class="mySlides">
+            <img class="slideshowimage" src="../images/movieposters.jpg" style="width:70%">
+          </div>
+          
+          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          
+          </div>
+          <br>
+          
+          <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+            <span class="dot" onclick="currentSlide(3)"></span> 
+          </div>
+        <br>
+      </div>
+
+      <div class="col-md-6">
+        <h2> New to Couch Potato? Sign Up!</h2>
         <form class="signup">
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
@@ -57,6 +83,36 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/signup.js"></script>
+  <script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";  
+      }
+      for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active";
+    }
+    </script>
+    
+
 </body>
 
 </html>
