@@ -2,7 +2,7 @@
 
 body {
 	color: #fff;
-	background: #292322;
+	background: black;
 }
 
 .hamburger {
@@ -19,23 +19,23 @@ body {
 
 .navbar-header{
     color: #fff;
-    background: #292322;
+    background: black;
 }
 
 .container-fluid {
     color: #fff;
-    background: #292322;
+    background: black;
 }
 
-/* .showcase__content>span{
+.showcase__content>span{
 	transition:all 0.5s ease-in-out;
 }
 .showcase__content>span:hover {
 	text-shadow: none;
-} */
+}
 
 
-/* .showcase {
+.showcase {
 	position: relative;
 	padding: 25px;
 	text-align: center;
@@ -49,4 +49,13 @@ body {
 		width: 80%;
 		border-bottom: 1px solid #fff;
 		content: "";
-	} */
+	}
+
+.couchpic {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	width: 350px;
+}
+
