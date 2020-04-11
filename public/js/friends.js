@@ -27,7 +27,7 @@
       data.forEach(function(element) {
         let allFriends = $("<div>");
         let friendID = element.requester;
-        let pOne = $("<p>").text("friendly friend: " + friendID);
+        let pOne = $("<p>").text(friendID);
         allFriends.append(pOne);
         let acceptbtn = $("<button class='accept'>").text('accept').val(element.id);;
         let declinebtn = $("<button class='decline'>").text('decline').val(element.id);

@@ -173,6 +173,14 @@ ul.ultimatelist {
 	top: 0px;
 }
 
+.select:not(.is-multiple):not(.is-loading)::after {
+    border-color: darkred;
+}
+
+input {
+	color: black;
+}
+
 
 .container.blog .card {
 	margin-bottom: 20px;
