@@ -26,8 +26,7 @@ module.exports = function(sequelize, DataTypes) {
     });
 
   Challenges.associate = function(models) {
-    // We're saying that a Challenge should belong to a User
-    // A Challenge can't be created without a User due to the foreign key constraint
+   
     Challenges.belongsTo(models.User, {
       foreignKey: {
         allowNull: false
