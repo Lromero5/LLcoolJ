@@ -207,6 +207,17 @@ input {
 	.navbar-menu a { 
 		color: yellow;
 	}
+
+	button, input[type="button"], input[type="submit"] { 
+		padding: 0em;
+		font-size: 0.7em;
+	}
+
+	.btn{
+		padding: 0em;
+		font-size: 0.7em;
+	}
+
 }
 
 
