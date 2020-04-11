@@ -13,20 +13,39 @@
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="container-fluid">
-            <div class="navbar-brand">
-                <a class="navbar-brand showcase__content" href="/members"><span class="hamburger">Couch Potato</span></a>
-            </div>
-            <ul class="navbar-menu">
-                <li class="navbar-link"><a href="/members">Home</a></li>
-                <li class="navbar-link"><a href="/browse">Browse</a></li>
-                <li class="navbar-link"><a href="/challenge-request">Challenge Your Friends</a></li>
-                <li class="navbar-link"><a href="/challenge-board">View Your Challenge Board</a></li>
-                <li class="navbar-link"> <a class="navbar-brand" href="/logout"> Logout</a> </li>
-            </ul>
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-brand showcase__content" href="/">
+            <span class="hamburger">Couch Potato</span></a>
+          </a>
+      
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-    </nav>
+      
+        <div class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="/members">
+                Home
+            </a>
+            <a class="navbar-item" href="/browse">
+                Browse
+            </a>
+            <a class="navbar-item" href="/challenge-request">
+                Challenger Your Friends
+            </a>
+            <a class="navbar-item" href="/challenge-board">
+                View Your Challenge Board
+            </a>
+            <a class="navbar-item navbar-brand" href="/logout">>
+                Logout
+            </a>
+          </div>
+        </div>
+      </nav>
     <div class ="container">
 
   <div class="row dynamicdata">
@@ -75,6 +94,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/members.js"></script>
   <script type="text/javascript" src="js/friends.js"></script>
+  <script type="text/javascript" src="js/navbar.js"></script>
 
 </body>
 
