@@ -28,8 +28,6 @@ function displayMovieInfo() {
   $("#add-movie").on("click", displayMovieInfo);
 
   $(document).on("click", ".savedbtn", function(){
-    // console.log("you got clicked!")
-    // console.log($(this).attr("name"));
     var newmovie = {
       title: $(this).attr("name")
     };
@@ -38,9 +36,6 @@ function displayMovieInfo() {
       url: "/savemovie",
       type: "POST",
       data: newmovie
-    }).then(function(data){
-      console.log(data);
-    })
-
+    });
   });
 
