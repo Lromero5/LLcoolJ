@@ -157,6 +157,29 @@ ul.ultimatelist {
 	font-weight: 700;
 }  
 
+.container.blog strong {
+	font-size: large;
+	color: darkred;
+}
+
+.container.blog button {
+	height: 15px;
+	width: 15px;
+	padding: .8em .8em;
+	display: block;
+	margin: 5px;
+	position: absolute;
+	right: 20px;
+	top: 0px;
+}
+
+
+.container.blog .card {
+	margin-bottom: 20px;
+	padding-right: 45px;
+	}
+
+
 @media screen and (max-width: 1023px) {
 	body {
 		margin-top: 0 px;
