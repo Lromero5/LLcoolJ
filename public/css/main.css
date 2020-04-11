@@ -1,13 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Dawning+of+a+New+Day|Sniglet:800|Monoton|Fredoka+One|Lobster);
-
+html {
+	background: black;
+}
+.navbar{
+	background: black;
+}
 body {
 	color: #fff;
 	background: black;
-}
+} 
 
 .hamburger {
 	font: 800 64px/64px 'Sniglet', sans-serif;
-	color: #e1b38e;
+	color: darkred;
 	text-shadow: -1px 1px 0 #9a653b,
 		-2px 2px 0 #9a653b,
 		-6px 1px 0 #690,

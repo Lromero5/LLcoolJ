@@ -75,8 +75,15 @@
       
   };
 
-  function getFriendWatching(username) {
-    $.get("/api/watching/" + username, function(data) {
+  function getFriendId(friend) {
+    $.get("/api/user/" + friend).then(function(data) {
+    getFriendWatching(data.id);
+    });
+  };
+
+  function getFriendWatching(id) {
+
+    $.get("/api/watching/" + id, function(data) {
       $("#library").empty();
       data.forEach(function(element) { 
         var movie = element.title;
@@ -108,5 +115,5 @@
   $("#friend-finder").on("click", sendRequest);
 
   $(document).on("click", ".friendButton", function() {
-    getFriendWatching(this.value);
+    getFriendId(this.value);
   });
