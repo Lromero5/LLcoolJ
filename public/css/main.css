@@ -6,6 +6,7 @@ html {
 	background: black;
 }
 body {
+	margin-top: 100px;
 	color: #fff;
 	background: black;
 } 
@@ -104,7 +105,7 @@ ul.ultimatelist {
  }
 
   img {
-	  width: 75%;
+	  width: 50%;
   }
 
 
