@@ -45,8 +45,9 @@
         </div>
       </nav>
     </div>
-		<div class="row">
-			<div class="column offset-md-3">
+    <div class="container">
+		<div class="columns">
+			<div class="column">
 				<form id="cms">
 					<div class="form-group">
 						<label for="title">Suggestion:</label>
@@ -55,8 +56,10 @@
 						<label for="body">Talk Smack Here!</label>
 						<textarea placeholder="Post Body" class="form-control" rows="10" id="body"></textarea>
 						<div class="form-group">
-							<label for="category">Select Friend:</label>
+              <label for="category">Select Friend:</label>
+              <div class="select">
 							<select class="custom-select" id="friend">
+              </div>
   						</select>
 						</div>
 						<br />
@@ -64,7 +67,8 @@
 					</div>
 				</form>
 			</div>
-		</div>
+    </div>
+  </div>
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
