@@ -10,9 +10,9 @@
           url: "/friendrequest",
           type: "POST",
           data: element
-        }).then(function(data){
-          console.log(data);
-        })
+        }).then(
+          getFriends
+        );
       }
       else {
         console.log("no user by that id");
@@ -48,9 +48,7 @@
       data.forEach(function(element) {
         var allFriends = $("<div>");
         var friendID = element.requester;
-        var pOne = $("<p>").text("friendly friend: " + friendID);
-        allFriends.append(pOne);
-        var completebtn = $("<button>").text('view').addClass("friendButton").val(element.requester);
+        var completebtn = $("<button>").text(friendID).addClass("friendButton").val(friendID);
         allFriends.append(completebtn);
         $("#friends").append(allFriends);
       });
@@ -71,8 +69,12 @@
       method: "PUT",
       url: "/api/friends/" + id
     })
-      .then(getFriends);
-      
+      .then(
+        getFriends
+      )
+      .then(
+        getRequest
+      );   
   };
 
   function getFriendId(friend) {
