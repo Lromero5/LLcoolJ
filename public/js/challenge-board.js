@@ -1,7 +1,7 @@
 $(document).ready(function() {
   var challengeContainer = $(".challenge-container");
   var issuedContainer = $(".issued-container");
-  $(document).on("click", "button.delete", handleChallengeDelete);
+  $(document).on("click", ".del", handleChallengeDelete);
   var challenges;
   var i = 0;
   getChallenges();
@@ -61,17 +61,17 @@ $(document).ready(function() {
     // newPostCardHeading.addClass("card-header");
     var deleteBtn = $("<button>");
     deleteBtn.text("x");
-    // deleteBtn.addClass("delete btn btn-danger");
+    deleteBtn.addClass("del");
     deleteBtn.val(value.id);
     var newPostTitle = $("<h2>");
     var newPostDate = $("<small>");
     // var newPostAuthor = $("<h5>");
-    // newPostAuthor.text("Written by: " + value.challenger);
+    // newPostAuthor.text("Written by: " + value.challenger );
     var newPostCardBody = $("<div>");
     // newPostCardBody.addClass("card-body");
     var newPostBody = $("<p>");
     newPostTitle.text("Title: " + value.title + " ");
-    newPostBody.text("Message you sent your friend: " + value.body);
+    newPostBody.text(value.challenger + " said: " + value.body);
     newPostDate.text(formattedDate);
     newPostCardHeading.append(newPostTitle);
     // newPostCardHeading.append(newPostAuthor);
