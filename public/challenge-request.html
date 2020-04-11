@@ -3,33 +3,31 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>CMS - Express</title>
-	<!-- Latest compiled and minified CSS & JS -->
+	<title>Challenge</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<link href="./css/main.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
 </head>
 
 <body>
     <nav class="navbar">
-        <div class= "row">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand showcase__content" href="/members"><span class="hamburger">Couch Potato</span></a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/members">Home</a></li>
-                    <li><a href="/browse">Browse</a></li>
-                    <li><a href="/challenge-request">Challenge Your Friends</a></li>
-                    <li><a href="/challenge-board">View Your Challenge Board</a></li>
-                    <li> <a class="navbar-brand" href="/logout"> Logout</a> </li>
-                </ul>
+        <div class="container-fluid">
+            <div class="navbar-brand">
+                <a class="navbar-brand showcase__content" href="/members"><span class="hamburger">Couch Potato</span></a>
             </div>
+            <ul class="navbar-menu">
+                <li class="navbar-link"><a href="/members">Home</a></li>
+                <li class="navbar-link"><a href="/browse">Browse</a></li>
+                <li class="navbar-link"><a href="/challenge-request">Challenge Your Friends</a></li>
+                <li class="navbar-link"><a href="/challenge-board">View Your Challenge Board</a></li>
+                <li class="navbar-link"> <a class="navbar-brand" href="/logout"> Logout</a> </li>
+            </ul>
         </div>
-	</nav>
-	
+    </nav>
     </div>
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
