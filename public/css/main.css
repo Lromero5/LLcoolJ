@@ -153,5 +153,19 @@ ul.ultimatelist {
 	font-weight: 700;
 }  
 
+@media screen and (max-width: 1023px) {
+	body {
+		margin-top: 150px;
+	}
+	.hamburger {
+		width: 50%;
+	}
+
+	.navbar-menu {
+		background-color: darkred;
+		box-shadow: 0 8px 16px rgba(10,10,10,.1);
+		padding: .5rem 0;
+	}
+}
 
 
