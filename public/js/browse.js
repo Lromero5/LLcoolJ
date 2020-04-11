@@ -8,17 +8,17 @@ function displayMovieInfo() {
       method: "GET"
     }).then(function (response) {
   
-      var movieDiv = $("<div class='movie'>");
-      var rating = response.Rated;
-      var pOne = $("<p>").text("Rating: " + rating);
+      let movieDiv = $("<div class='movie'>");
+      let rating = response.Rated;
+      let pOne = $("<p>").text("Rating: " + rating);
       movieDiv.append(pOne);
-      var imgURL = response.Poster;
-      var image = $("<img>").attr("src", imgURL);
+      let imgURL = response.Poster;
+      let image = $("<img>").attr("src", imgURL);
       movieDiv.append(image);
       $("#movies-view").empty();
       $("#movies-view").append(movieDiv);
      
-      var savebtn = $("<button>").text('Save to Library').addClass("savedbtn");
+      let savebtn = $("<button>").text('Save to Library').addClass("savedbtn");
       savebtn.attr('name', response.Title);
       movieDiv.append(savebtn);
     });
@@ -28,7 +28,7 @@ function displayMovieInfo() {
   $("#add-movie").on("click", displayMovieInfo);
 
   $(document).on("click", ".savedbtn", function(){
-    var newmovie = {
+    let newmovie = {
       title: $(this).attr("name")
     };
 

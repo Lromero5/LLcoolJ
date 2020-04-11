@@ -1,20 +1,18 @@
 $(document).ready(function() {
-  var challengeContainer = $(".challenge-container");
-  var issuedContainer = $(".issued-container");
+  let challengeContainer = $(".challenge-container");
+  let issuedContainer = $(".issued-container");
   $(document).on("click", ".del", handleChallengeDelete);
-  var challenges;
-  var i = 0;
+  let challenges;
+  let i = 0;
   getChallenges();
 
   function getChallenges() {
     $.get("/api/challenge", function(data) {
-      console.log("Challenge", data);
       Challenge = data;
       if (!Challenge|| !Challenge.length) {
         getIssued();
       }
       else {
-        console.log(i);
         initializeRows(Challenge, "cha");
       }
     });
@@ -23,7 +21,6 @@ $(document).ready(function() {
   function getIssued() {
     $.get("/api/issued", function(data) {
       Issued = data;
-      console.log(data);
       if (!Issued|| !Issued.length) {
         return;
       }
@@ -52,29 +49,23 @@ $(document).ready(function() {
   };
 
   function createNewRow(value) {
-    console.log(value);
-    var formattedDate = new Date(value.createdAt);
+    let formattedDate = new Date(value.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
-    var newPostCard = $("<div>");
+    let newPostCard = $("<div>");
     newPostCard.addClass("card");
-    var newPostCardHeading = $("<div>");
-    // newPostCardHeading.addClass("card-header");
-    var deleteBtn = $("<button>");
+    let newPostCardHeading = $("<div>");
+    let deleteBtn = $("<button>");
     deleteBtn.text("x");
     deleteBtn.addClass("del");
     deleteBtn.val(value.id);
-    var newPostTitle = $("<h2>");
-    var newPostDate = $("<small>");
-    // var newPostAuthor = $("<h5>");
-    // newPostAuthor.text("Written by: " + value.challenger );
-    var newPostCardBody = $("<div>");
-    // newPostCardBody.addClass("card-body");
-    var newPostBody = $("<p>");
+    let newPostTitle = $("<h2>");
+    let newPostDate = $("<small>");
+    let newPostCardBody = $("<div>");
+    let newPostBody = $("<p>");
     newPostTitle.text("Title: " + value.title + " ");
     newPostBody.text(value.challenger + " said: " + value.body);
     newPostDate.text(formattedDate);
     newPostCardHeading.append(newPostTitle);
-    // newPostCardHeading.append(newPostAuthor);
     newPostCardBody.append(newPostBody);
     newPostCard.append(newPostCardHeading);
     newPostCard.append(newPostCardBody);
@@ -83,7 +74,6 @@ $(document).ready(function() {
     newPostCard.data("challenges", challenges);
     if(i === 0) {
       i=i+1;
-      console.log(i);
       getIssued();
     }
     return newPostCard;
@@ -99,13 +89,13 @@ $(document).ready(function() {
   };
 
   function displayEmpty(id) {
-    var query = window.location.search;
-    var partial = "";
+    let query = window.location.search;
+    let partial = "";
     if (id) {
       partial = " for User #" + id;
     };
     blogContainer.empty();
-    var messageH2 = $("<h2>");
+    let messageH2 = $("<h2>");
     messageH2.css({ "text-align": "center", "margin-top": "50px" });
     messageH2.html("No challenges yet" + partial + ", navigate <a href='/challenge-request" + query +
     "'>here</a> in order to get started.");

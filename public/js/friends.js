@@ -4,7 +4,6 @@
       let userSearch = $("#user-search").val();
       let users = data;
       users.forEach(function(element) {
-        console.log(element);
       if(userSearch === element.username) {
         $.ajax({
           url: "/friendrequest",
@@ -13,9 +12,6 @@
         }).then(
           getFriends
         );
-      }
-      else {
-        console.log("no user by that id");
       }
       });
     });
@@ -95,12 +91,9 @@
           method: "GET"
         }).then(function (response) {
           let movieDiv = $("<div class='movie'>");
-          let rating = response.Rated;
-          let pOne = $("<p>").text("Rating: " + rating);
+          let title = response.Title;
+          let pOne = $("<p>").text(title);
           movieDiv.append(pOne);
-          let released = response.Released;
-          let pTwo = $("<p>").text("Released: " + released);
-          movieDiv.append(pTwo);;
           let imgURL = response.Poster;
           let image = $("<img>").attr("src", imgURL);
           movieDiv.append(image);

@@ -16,6 +16,10 @@ body {
 	background: black;
 } 
 
+h2 {
+	color: white;
+}
+
 .hamburger {
 	font: 800 64px/64px 'Sniglet', sans-serif;
 	color: darkred;
