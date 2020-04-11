@@ -1,8 +1,8 @@
 
   function sendRequest() {
     $.get("/api/user", function(data) {
-      var userSearch = $("#user-search").val();
-      var users = data;
+      let userSearch = $("#user-search").val();
+      let users = data;
       users.forEach(function(element) {
         console.log(element);
       if(userSearch === element.username) {
@@ -25,12 +25,12 @@
     $("#pending").empty();
     $.get("/api/request", function(data) {
       data.forEach(function(element) {
-        var allFriends = $("<div>");
-        var friendID = element.requester;
-        var pOne = $("<p>").text("friendly friend: " + friendID);
+        let allFriends = $("<div>");
+        let friendID = element.requester;
+        let pOne = $("<p>").text("friendly friend: " + friendID);
         allFriends.append(pOne);
-        var acceptbtn = $("<button class='accept'>").text('accept').val(element.id);;
-        var declinebtn = $("<button class='decline'>").text('decline').val(element.id);
+        let acceptbtn = $("<button class='accept'>").text('accept').val(element.id);;
+        let declinebtn = $("<button class='decline'>").text('decline').val(element.id);
         acceptbtn.attr('onclick', "accept(" + element.id + ")");
         declinebtn.attr('onclick', "decline(" + element.id + ")");
         allFriends.append(acceptbtn);
@@ -46,9 +46,9 @@
     $("#friends").empty();
     $.get("/api/friends", function(data) {
       data.forEach(function(element) {
-        var allFriends = $("<div>");
-        var friendID = element.requester;
-        var completebtn = $("<button>").text(friendID).addClass("friendButton").val(friendID);
+        let allFriends = $("<div>");
+        let friendID = element.requester;
+        let completebtn = $("<button>").text(friendID).addClass("friendButton").val(friendID);
         allFriends.append(completebtn);
         $("#friends").append(allFriends);
       });
@@ -88,28 +88,28 @@
     $.get("/api/watching/" + id, function(data) {
       $("#library").empty();
       data.forEach(function(element) { 
-        var movie = element.title;
-        var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
+        let movie = element.title;
+        let queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
         $.ajax({
           url: queryURL,
           method: "GET"
         }).then(function (response) {
-          var movieDiv = $("<div class='movie'>");
-          var rating = response.Rated;
-          var pOne = $("<p>").text("Rating: " + rating);
+          let movieDiv = $("<div class='movie'>");
+          let rating = response.Rated;
+          let pOne = $("<p>").text("Rating: " + rating);
           movieDiv.append(pOne);
-          var released = response.Released;
-          var pTwo = $("<p>").text("Released: " + released);
+          let released = response.Released;
+          let pTwo = $("<p>").text("Released: " + released);
           movieDiv.append(pTwo);;
-          var imgURL = response.Poster;
-          var image = $("<img>").attr("src", imgURL);
+          let imgURL = response.Poster;
+          let image = $("<img>").attr("src", imgURL);
           movieDiv.append(image);
           $("#library").append(movieDiv);
   
         });
       });
     });
-  }
+  };
 
   getFriends();
   getRequest();
