@@ -2,47 +2,46 @@
 <html lang="en">
 
 <head>
-  <title>TBD</title>
+  <title>Browse</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
-  <link href="css/main.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link href="./css/main.css" rel="stylesheet">
 </head>
 
 <body>
     <nav class="navbar">
-        <div class= "row">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand showcase__content" href="/members"><span class="hamburger">Couch Potato</span></a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/members">Home</a></li>
-                    <li><a href="/browse">Browse</a></li>
-                    <li><a href="/challenge-request">Challenge Your Friends</a></li>
-                    <li><a href="/challenge-board">View Your Challenge Board</a></li>
-                    <li> <a class="navbar-brand" href="/logout"> Logout</a> </li>
-                </ul>
+        <div class="container-fluid">
+            <div class="navbar-brand">
+                <a class="navbar-brand showcase__content" href="/members"><span class="hamburger">Couch Potato</span></a>
             </div>
+            <ul class="navbar-menu">
+                <li class="navbar-link"><a href="/members">Home</a></li>
+                <li class="navbar-link"><a href="/browse">Browse</a></li>
+                <li class="navbar-link"><a href="/challenge-request">Challenge Your Friends</a></li>
+                <li class="navbar-link"><a href="/challenge-board">View Your Challenge Board</a></li>
+                <li class="navbar-link"> <a class="navbar-brand" href="/logout"> Logout</a> </li>
+            </ul>
         </div>
     </nav>
-        <div class = "row col-md-offset-3" >
-            <form id="movie-form">
-                <label for="movie-input">Search</label>
-                <input type="text" id="movie-input" value="">
-                <br>
-          
-                <!-- Button triggers new movie to be added -->
-                <input id="add-movie" type="button" value="button">
-            </form>
-        </div>
 
-        <div class = "container">
+<div class = "container" >
+      <form id="movie-form">
+           <label for="movie-input">Search for a show or movie</label>
+            <input type="text" id="movie-input" value="">
+          <br>
+           <input id="add-movie" type="button" value="browse">
+       </form>
+    
+
         <h2>Search Results</h2>
         <div id="movies-view">
 
         </div>
-    </div>
+ </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/browse.js"></script>
