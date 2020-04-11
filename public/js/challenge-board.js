@@ -67,12 +67,6 @@ $(document).ready(function() {
     var newPostDate = $("<small>");
     var newPostAuthor = $("<h5>");
     newPostAuthor.text("Written by: " + value.challenger);
-    newPostAuthor.css({
-      float: "right",
-      color: "blue",
-      "margin-top":
-      "-10px"
-    });
     var newPostCardBody = $("<div>");
     newPostCardBody.addClass("card-body");
     var newPostBody = $("<p>");
