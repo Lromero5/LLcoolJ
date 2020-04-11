@@ -25,7 +25,7 @@ $(document).ready(function() {
           url: queryURL,
           method: "GET"
         }).then(function (response) {
-          let movieDiv = $("<div class='movie'>");
+          let movieDiv = $("<div class='movie watchingcard'>");
           let rating = response.Rated;
           let pOne = $("<p>").text("Rating: " + rating);
           movieDiv.append(pOne);
