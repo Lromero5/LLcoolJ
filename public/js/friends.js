@@ -10,7 +10,7 @@
           type: "POST",
           data: element
         }).then(
-          getFriends
+          getFriends()
         );
       }
       });

@@ -58,7 +58,7 @@ $(document).ready(function() {
     deleteBtn.text("x");
     deleteBtn.addClass("del");
     deleteBtn.val(value.id);
-    let newPostTitle = $("<h2>");
+    let newPostTitle = $("<h3>");
     let newPostDate = $("<small>");
     let newPostCardBody = $("<div>");
     let newPostBody = $("<p>");
