@@ -3,20 +3,19 @@ $(document).ready(function() {
   $.get("/api/user_data").then(function(data) {
     currentUser = data.username;
   });
-  var bodyInput = $("#body");
-  var titleInput = $("#title");
-  var cmsForm = $("#cms");
-  var friendSelect = $("#friend");
-  console.log(friendSelect.val());
+  let bodyInput = $("#body");
+  let titleInput = $("#title");
+  let cmsForm = $("#cms");
+  let friendSelect = $("#friend");
   $(cmsForm).on("submit", handleFormSubmit);
   
-  var url = window.location.search;
-  var challengeId;
-  var updating = false;
+  let url = window.location.search;
+  let challengeId;
+  let updating = false;
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    var newChallenge = {
+    let newChallenge = {
       title: titleInput
         .val()
         .trim(),
@@ -43,20 +42,19 @@ $(document).ready(function() {
   };
 
   function getChallengeData(id, type) {
-    var queryUrl;
+    let queryUrl;
     switch (type) {
     case "challenge":
       queryUrl = "/api/challenge/" + id;
       break;
     case "user":
-      queryUrl = "/api/user/" + Userid; // Review
+      queryUrl = "/api/user/" + Userid;
       break;
     default:
       return;
     }
     $.get(queryUrl, function(data) {
       if (data) {
-        console.log(data.UserId || data.id);
         titleInput.val(data.title);
         bodyInput.val(data.body);
         UserId = data.UserId || data.id;
@@ -68,7 +66,6 @@ $(document).ready(function() {
 
   function getFriends() {
     $.get("/api/friends", function(data) {
-      console.log("!!!!!!!!!!!!!!!",data); 
 
      renderFriendList(data);
     });
@@ -78,15 +75,14 @@ $(document).ready(function() {
   
   function renderFriendList(data) {
     $(".hidden").removeClass("hidden");
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       friendSelect.append(createFriendrRow(data[i])[0]);
     };
 
   };
 
   function createFriendrRow(friendId) {
-    var listOption = $("<option>");
-    console.log(friendId);
+    let listOption = $("<option>");
     listOption.attr("value", friendId.requester);
     listOption.text(friendId.requester);
     

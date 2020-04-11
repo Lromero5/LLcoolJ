@@ -1,17 +1,9 @@
-// Requiring our models and passport as we've configured it
+
 var db = require("../models");
 var passport = require("../config/passport");
 
 module.exports = function(app) {
-  // Using the passport.authenticate middleware with our local strategy.
-  // If the user has valid login credentials, send them to the members page.
-  // Otherwise the user will be sent an error
   app.post("/api/login", function(req, res) {
-    // Sending back a password, even a hashed password, isn't a good idea
-    // res.json({
-    //   email: req.user.email,
-    //   id: req.user.id
-    // });
     let username = req.body.username;
     let password = req.body.password;
 
@@ -21,9 +13,7 @@ module.exports = function(app) {
       } else if (!user.validPassword(password)) {
         res.redirect('/login');
       } else {
-        console.log('valid info received')
         req.session.user = user.dataValues;
-        console.log(req.session.user)
         res.redirect('/members');
       }
     });    
@@ -82,9 +72,6 @@ module.exports = function(app) {
 
   app.post("/savemovie", function(req, res){
     db.Watching.create({title: req.body.title, UserId: req.session.user.id})
-    .then(function(data){
-      console.log(data);
-    });
   });
 
   app.get("/api/watching", function(req, res) {
@@ -98,7 +85,6 @@ module.exports = function(app) {
   })
 
   app.get("/api/watching/:id", function(req, res) {
-    console.log(req.params);
     db.Watching.findAll({
       where: {
         UserId: req.params.id,
@@ -168,7 +154,6 @@ module.exports = function(app) {
       ...req.body,
       UserId: req.session.user.id
     };
-    console.log(userData);
     db.Challenges.create(userData)
     .then(function(dbChallenges) {
       res.json(dbChallenges);
@@ -216,7 +201,6 @@ module.exports = function(app) {
         UserId: req.session.user.id,
       }
     }).then(function(data){
-      console.log("about to do an update", req.params.title)
       db.Watching.update(
         {completed: true}, 
         {where: {
@@ -241,9 +225,7 @@ module.exports = function(app) {
         {where: {
           id: req.session.user.id
         }}
-      ).then(function(updatedata){
-        // console.log(updatedata)
-      });
+      );
     });
   });
 
