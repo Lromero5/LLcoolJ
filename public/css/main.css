@@ -5,6 +5,11 @@ html {
 .navbar{
 	background: black;
 }
+
+.navbar-burger {
+	color: white;
+}
+
 body {
 	margin-top: 100px;
 	color: #fff;
@@ -14,13 +19,13 @@ body {
 .hamburger {
 	font: 800 64px/64px 'Sniglet', sans-serif;
 	color: darkred;
-	text-shadow: -1px 1px 0 transparent,
-		-2px 2px 0 transparent,
+	text-shadow: -1px 1px 0 black,
+		-2px 2px 0 black,
 		-6px 1px 0 yellow,
-		2px 4px 0 transparent,
-		-3px 3px 0 transparent,
-		-4px 4px 0 transparent,
-		-5px 5px 0 transparent;
+		2px 4px 0 black,
+		-3px 3px 0 black,
+		-4px 4px 0 black,
+		-5px 5px 0 black;
 }
 
 .navbar-header{
@@ -40,7 +45,6 @@ body {
 	text-shadow: none;
 }
 
-
 .showcase {
 	position: relative;
 	padding: 25px;
@@ -48,14 +52,14 @@ body {
 }
 
 .showcase::before {
-		position: absolute;
-		top: 50px;
-		left: 10%;
-		display: block;
-		width: 80%;
-		border-bottom: 1px solid #fff;
-		content: "";
-	}
+	position: absolute;
+	top: 50px;
+	left: 10%;
+	display: block;
+	width: 80%;
+	border-bottom: 1px solid yellow;
+	content: "";
+}
 
 .couchpic {
 	display: block;
@@ -113,9 +117,9 @@ ul.ultimatelist {
   box-sizing: border-box;
   appearance: none;
   background-color: transparent;
-  border: 2px solid #e74c3c;
+  border: 2px solid darkred;
   border-radius: 0.6em;
-  color: #e74c3c;
+  color: darkred;
   cursor: pointer;
   display: flex;
   align-self: center;
@@ -130,14 +134,14 @@ ul.ultimatelist {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   }
-
+/* #e74c3c */
   button, input[type="button"], input[type="submit"] { 
 	box-sizing: border-box;
 	appearance: none;
 	background-color: transparent;
-	border: 2px solid #e74c3c;
+	border: 2px solid darkred;
 	border-radius: 0.6em;
-	color: #e74c3c;
+	color: darkred;
 	cursor: pointer;
 	display: flex;
 	align-self: center;
@@ -155,16 +159,22 @@ ul.ultimatelist {
 
 @media screen and (max-width: 1023px) {
 	body {
-		margin-top: 150px;
+		margin-top: 0 px;
+		text-align: center;
 	}
 	.hamburger {
-		width: 50%;
+		font: 800 32px/32px 'Sniglet', sans-serif;
 	}
 
 	.navbar-menu {
 		background-color: darkred;
 		box-shadow: 0 8px 16px rgba(10,10,10,.1);
 		padding: .5rem 0;
+		width: 30%;
+	}
+	
+	.navbar-menu a { 
+		color: yellow;
 	}
 }
 
