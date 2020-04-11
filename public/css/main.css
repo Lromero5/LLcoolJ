@@ -14,13 +14,13 @@ body {
 .hamburger {
 	font: 800 64px/64px 'Sniglet', sans-serif;
 	color: darkred;
-	text-shadow: -1px 1px 0 #9a653b,
-		-2px 2px 0 #9a653b,
-		-6px 1px 0 #690,
-		2px 4px 0 #a10,
-		-3px 3px 0 #e1b38e,
-		-4px 4px 0 #9a653b,
-		-5px 5px 0 #9a653b;
+	text-shadow: -1px 1px 0 transparent,
+		-2px 2px 0 transparent,
+		-6px 1px 0 yellow,
+		2px 4px 0 transparent,
+		-3px 3px 0 transparent,
+		-4px 4px 0 transparent,
+		-5px 5px 0 transparent;
 }
 
 .navbar-header{

@@ -1,6 +1,4 @@
 $(document).ready(function() {
-  // This file just does a GET request to figure out which user is logged in
-  // and updates the HTML on the page
   $.get("/api/user_data").then(function(data) {
     $(".member-name").text(data.username);
   });
@@ -13,7 +11,7 @@ $(document).ready(function() {
       }
     }
     $('#showCount').text( "Chip Count:  " + count)
-  }
+  };
 
   function getWatching() {
     $.get("/api/watching", function(data) {
@@ -26,17 +24,13 @@ $(document).ready(function() {
           method: "GET"
         }).then(function (response) {
           let movieDiv = $("<div class='movie watchingcard'>");
-          let rating = response.Rated;
-          let pOne = $("<p>").text("Rating: " + rating);
+          let title = response.Title;
+          let pOne = $("<p>").text(title);
           movieDiv.append(pOne);
-          let released = response.Released;
-          let pTwo = $("<p>").text("Released: " + released);
-          movieDiv.append(pTwo);;
           let imgURL = response.Poster;
           let image = $("<img>").attr("src", imgURL);
           movieDiv.append(image);
           $("#library").append(movieDiv);
-
 
           if( !element.completed ) {
             let completebtn = $("<button>").text('Complete').addClass("chipcount").attr("name", movie)
@@ -45,16 +39,12 @@ $(document).ready(function() {
         });
       });
     });
-  }
-
-
+  };
 
   $(document).on("click", ".chipcount", function(){
     $.ajax({
       url: "/changestatus/" + $(this).attr("name"),
       type: "Put",
-    }).then(function(data){
-      // console.log(data)
     });
     this.remove();  
 
@@ -69,11 +59,8 @@ $(document).ready(function() {
     $.ajax({
       url: "/addchip",
       type: "Put",
-    }).then(function(data){
-      // console.log(data)
     });
   };
-
 
   $.ajax({
     url: "/ultimatecouchpotato",
